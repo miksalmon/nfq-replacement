@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Includes props that need to be used by all of our C++/WinRT with IDL projects. -->
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <ItemDefinitionGroup>
+        <ClCompile>
+            <AdditionalOptions>%(AdditionalOptions) /bigobj</AdditionalOptions>
+            <PreprocessorDefinitions>_WINRT_DLL;WINRT_LEAN_AND_MEAN;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+            <CompileAsWinRT>false</CompileAsWinRT>
+        </ClCompile>
+        <Midl>
+            <AdditionalIncludeDirectories>$(ProjectDir)..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+        </Midl>
+    </ItemDefinitionGroup>
+</Project>

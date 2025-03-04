@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!-- NOTE: When updating any dependency version that relies on a NuGet package, ensure to also
+       update and match the version of Packages.config under Photos.Configuration project. -->
+  <PropertyGroup>
+    <!-- Prevent duplicate imports by testing this property -->
+    <VersionDependenciesPropsImported>true</VersionDependenciesPropsImported>
+    <!-- Windows SDK -->
+    <WindowsSdkTargetVersion>10.0.22621.0</WindowsSdkTargetVersion>
+    <WindowsSdkMinVersion>10.0.22000.0</WindowsSdkMinVersion>
+    <WinAppSdkWindowsSdkPackageVersion>10.0.22621.56</WinAppSdkWindowsSdkPackageVersion>
+    <!-- Min version for Test projects that needs to be deployed (ie. that uses UI thread) -->
+    <WindowsSdkMinVersionForTests>10.0.19045.4717</WindowsSdkMinVersionForTests>
+    <WinAppSdkVersion>1.7.250208002-preview1</WinAppSdkVersion>
+    <BuildToolsVersion>10.0.26100.1591</BuildToolsVersion>
+    <!-- WebView 2 -->
+    <WebView2Version>1.0.2957.106</WebView2Version>
+    <!-- .NET -->
+    <DotNetMajorMinorVersion>9.0</DotNetMajorMinorVersion>
+    <!-- C#/WinRT -->
+    <!-- Extra info on CsWinRT versioning: https://github.com/microsoft/CsWinRT/blob/master/docs/version-history.md -->
+    <CsWinRTVersion>2.2.0</CsWinRTVersion>
+    <!-- C++/WinRT -->
+    <CppWinRtVersion>2.0.240405.15</CppWinRtVersion>
+    <!-- Implementation Library -->
+    <ImplementationLibraryVersion>1.0.240803.1</ImplementationLibraryVersion>
+  </PropertyGroup>
+</Project>

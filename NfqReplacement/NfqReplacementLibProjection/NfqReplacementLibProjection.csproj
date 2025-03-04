@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\Props\CSharp.WASDK.props" />
+
+  <ItemGroup>
+    <ProjectReference Include="..\NfqReplacementLib\NfqReplacementLib.vcxproj" />
+  </ItemGroup>
+
+  <ImportGroup Label="PropertySheets">
+    <Import Project="..\Props\OutputDir.props" Condition="exists('..\Props\OutputDir.props')" Label="OutputDirProps" />
+  </ImportGroup>
+
+  <!--CsWinRT properties-->
+  <PropertyGroup>
+    <!--Specify namespaces to create a C# projection for-->
+    <CsWinRTIncludes>NfqReplacementLib;</CsWinRTIncludes>
+    <!--Set output path for generated source files/projection dll to OutDir (defined in Directory.Build.props)-->
+    <CsWinRTGeneratedFilesDir>$(OutDir)</CsWinRTGeneratedFilesDir>
+  </PropertyGroup>
+</Project>

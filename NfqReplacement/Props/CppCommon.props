@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Includes props that need to be used by most of our C++ projects. -->
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <ItemDefinitionGroup>
+        <ClCompile>
+            <PrecompiledHeader>Use</PrecompiledHeader>
+            <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+            <PrecompiledHeaderOutputFile>$(IntDir)pch.pch</PrecompiledHeaderOutputFile>
+            <LanguageStandard>stdcpp20</LanguageStandard>
+            <WarningLevel>Level4</WarningLevel>
+            <TreatWarningAsError>true</TreatWarningAsError>
+            <DisableSpecificWarnings>4453;28204</DisableSpecificWarnings>
+            <AdditionalOptions>%(AdditionalOptions) /await /permissive- /bigobj</AdditionalOptions>
+            <SDLCheck>true</SDLCheck>
+            <AdditionalIncludeDirectories>$(ProjectDir)..;%(AdditionalIncludeDirectories);</AdditionalIncludeDirectories>
+            <PreprocessorDefinitions>WIN32_LEAN_AND_MEAN;NOMINMAX;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+        </ClCompile>
+    </ItemDefinitionGroup>
+    <PropertyGroup Label="Globals">
+        <MinimumVisualStudioVersion>17.0</MinimumVisualStudioVersion>
+    </PropertyGroup>
+    <PropertyGroup>
+        <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+    </PropertyGroup>
+    <ItemDefinitionGroup Condition="'$(VulcanReady)' == 'true'">
+        <ClCompile  Condition="'$(Configuration)'=='Debug'">
+            <AdditionalOptions>%(AdditionalOptions) /Zi</AdditionalOptions>
+        </ClCompile>
+        <!-- Vulcan Ready binaries require /debug even in release configuration -->
+        <!-- https://eng.ms/docs/products/apiscan/howto/preparinginput/binaries/creating_vulcan_ready_files -->
+        <Link>
+            <AdditionalOptions>%(AdditionalOptions) /debug /debugtype:cv,fixup /incremental:no /opt:ref /opt:icf</AdditionalOptions>
+        </Link>
+    </ItemDefinitionGroup>
+</Project>

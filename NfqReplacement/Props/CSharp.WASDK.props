@@ -1,0 +1,19 @@
+<Project>
+    <Import Project="..\Props\Version.Dependencies.props" Condition="'$(VersionDependenciesPropsImported)' == ''" />
+    <Import Project="..\Props\CSharp.Common.props"/>
+
+    <Import Project="CSharp.AOT.props"/>
+
+    <PropertyGroup>
+        <WindowsSdkPackageVersion>$(WinAppSdkWindowsSdkPackageVersion)</WindowsSdkPackageVersion>
+        <UseWinUI>true</UseWinUI>
+        <PublishReadyToRun>true</PublishReadyToRun>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.WindowsAppSDK" Version="$(WinAppSdkVersion)" />
+        <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="$(BuildToolsVersion)" />
+        <PackageReference Include="Microsoft.Windows.CsWinRT" Version="$(CsWinRTVersion)" />
+        <PackageReference Include="Microsoft.Web.WebView2" Version="$(WebView2Version)" />
+    </ItemGroup>
+</Project>

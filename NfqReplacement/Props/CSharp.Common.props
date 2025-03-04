@@ -1,0 +1,19 @@
+<Project>
+    <Import Project="..\Props\Version.Dependencies.props" Condition="'$(VersionDependenciesPropsImported)' == ''" />
+    
+    <PropertyGroup>
+        <TargetFramework>net$(DotNetMajorMinorVersion)-windows$(WindowsSdkTargetVersion)</TargetFramework>
+        <RuntimeIdentifiers>win-x64</RuntimeIdentifiers>
+        <UseRidGraph>true</UseRidGraph>
+        <Platforms>x64</Platforms>
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+        <MinimumVisualStudioVersion>17.0</MinimumVisualStudioVersion>
+        <FileAlignment>512</FileAlignment>
+        <Nullable>enable</Nullable>
+        <SupportedPlatform>Windows</SupportedPlatform>
+        <TargetPlatformMinVersion>$(WindowsSdkMinVersion)</TargetPlatformMinVersion>
+        <TargetPlatformVersion>$(WindowsSdkTargetVersion)</TargetPlatformVersion>
+        <Configurations>Debug;Release</Configurations>
+        <ChecksumAlgorithm>SHA256</ChecksumAlgorithm>
+    </PropertyGroup>
+</Project>
