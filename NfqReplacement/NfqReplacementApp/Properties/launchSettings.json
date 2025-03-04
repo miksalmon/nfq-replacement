@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "NfqReplacementApp": {
+      "commandName": "Project",
+      "nativeDebugging": true
+    }
+  }
+}

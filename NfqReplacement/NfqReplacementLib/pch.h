@@ -11,5 +11,3 @@
 #include <winrt/Microsoft.UI.Xaml.h>
 
 #include "common.h"
-
-// Please don't include our own project WinRT header files eg. winrt/Utils.h

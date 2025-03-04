@@ -7,8 +7,9 @@ internal class Program
 {
     static void Main(string[] args)
     {
-        var path = "C:\\Users\\Public\\Documents";
-        var files = WindowsSearch.GetFiles(path, "*.txt");
+        string path = "E:\\TestPhotos\\smallFolders\\20";
+        string sortProperty = "*.txt";
+        var files = WindowsSearch.GetFiles(path, sortProperty);
         Console.WriteLine($"Files in {path}");
 
         foreach (var file in files)
