@@ -1,0 +1,9 @@
+namespace NfqReplacementLib
+{
+    [bindable]
+    [default_interface]
+    static runtimeclass WindowsSearch 
+    {
+        static Windows.Foundation.Collections.IVector<String> GetFiles(String folderPath, String sortProperty);
+    }
+}
