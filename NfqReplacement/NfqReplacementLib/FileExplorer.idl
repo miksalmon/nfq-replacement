@@ -1,0 +1,12 @@
+import "FileExplorerSort.idl";
+
+namespace NfqReplacementLib
+{
+    [bindable]
+    [default_interface]
+    static runtimeclass FileExplorer 
+    {
+        static String GetFolder();
+        static Windows.Foundation.Collections.IVector<FileExplorerSort> GetSortColumns(String folderPath);
+    }
+}

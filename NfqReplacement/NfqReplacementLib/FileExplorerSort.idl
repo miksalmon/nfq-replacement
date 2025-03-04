@@ -1,0 +1,11 @@
+namespace NfqReplacementLib
+{
+    [bindable]
+    [default_interface]
+    runtimeclass FileExplorerSort
+    {
+        FileExplorerSort(String propertyKey, Boolean ascending);
+        String PropertyKey{ get; };
+        Boolean Ascending{ get; };
+    }
+}

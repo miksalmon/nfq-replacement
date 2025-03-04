@@ -71,7 +71,7 @@
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <AdditionalDependencies Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">SearchSDK.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Propsys.lib;Shell32.lib;SearchSDK.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)'=='Release'">
@@ -85,6 +85,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="common.h" />
+    <ClInclude Include="FileExplorer.h">
+      <DependentUpon>FileExplorer.idl</DependentUpon>
+      <SubType>Code</SubType>
+    </ClInclude>
+    <ClInclude Include="FileExplorerSort.h">
+      <DependentUpon>FileExplorerSort.idl</DependentUpon>
+      <SubType>Code</SubType>
+    </ClInclude>
     <ClInclude Include="pch.h" />
     <ClInclude Include="WindowsSearch.h">
       <DependentUpon>WindowsSearch.idl</DependentUpon>
@@ -92,6 +100,14 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="FileExplorer.cpp">
+      <DependentUpon>FileExplorer.idl</DependentUpon>
+      <SubType>Code</SubType>
+    </ClCompile>
+    <ClCompile Include="FileExplorerSort.cpp">
+      <DependentUpon>FileExplorerSort.idl</DependentUpon>
+      <SubType>Code</SubType>
+    </ClCompile>
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -118,6 +134,12 @@
     <ResourceCompile Include="NfqReplacementLib.rc" PreprocessorDefinitions="%(PreprocessorDefinitions);APP_VERSION_MAJOR=$(Version.Split(`.`)[0]);APP_VERSION_MINOR=$(Version.Split(`.`)[1]);APP_VERSION_BUILD=$(Version.Split(`.`)[2]);APP_VERSION_REVISION=$(Version.Split(`.`)[3])" />
   </ItemGroup>
   <ItemGroup>
+    <Midl Include="FileExplorer.idl">
+      <SubType>Designer</SubType>
+    </Midl>
+    <Midl Include="FileExplorerSort.idl">
+      <SubType>Designer</SubType>
+    </Midl>
     <Midl Include="WindowsSearch.idl">
       <SubType>Designer</SubType>
     </Midl>
