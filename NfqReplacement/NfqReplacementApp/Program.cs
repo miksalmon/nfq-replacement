@@ -39,13 +39,12 @@ internal class Program
         foreach (var file in files)
         {
             Console.WriteLine($"Name: {file.Name}");
-            //Console.WriteLine($"Path: {file.Path}");
-            //Console.WriteLine($"Kind: {file.Kind}");
-            //Console.WriteLine($"ItemDate: {file.ItemDate}");
-            //Console.WriteLine($"DateModified: {file.DateModified}");
-            //Console.WriteLine($"DateCreated: {file.DateCreated}");
+            Console.WriteLine($"Path: {file.Path}");
+            Console.WriteLine($"Kind: {file.Kind}");
+            Console.WriteLine($"ItemDate: {file.ItemDate}");
+            Console.WriteLine($"DateModified: {file.DateModified}");
+            Console.WriteLine($"DateCreated: {file.DateCreated}");
         }
-
         Console.WriteLine();
 
         Console.WriteLine("Press any key to exit...");

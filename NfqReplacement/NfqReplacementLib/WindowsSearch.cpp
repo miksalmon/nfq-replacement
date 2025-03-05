@@ -115,10 +115,11 @@ namespace winrt::NfqReplacementLib::implementation
 		}
 
 		auto isAscendingStr = isAscending ? L"ASC" : L"DESC";
-		std::wstring select = L"SELECT System.ItemNameDisplay, path, System.Kind, System.ItemDate, System.DateModified, System.DateCreated ";
+		std::wstring select = L"SELECT System.ItemNameDisplay, path, System.Kind, System.Photo.DateTaken, System.DateModified, System.DateCreated ";
 		std::wstring from = L"FROM SystemIndex ";
 		std::wstring where = std::format(L"WHERE(DIRECTORY = 'file:{}') ", folderPath);
 		std::wstring orderBy = std::format(L"ORDER BY {} {}", sortProperty, isAscendingStr);
+
 
 		auto query = select + from + where + orderBy;
 
