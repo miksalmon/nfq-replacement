@@ -42,7 +42,7 @@ namespace winrt::NfqReplacementLib::implementation
 		DBSTATUS status[6]; // One status per column
 	};
 
-	IVector<WindowsSearchResultItem> WindowsSearch::GetFiles(hstring const& folderPath, hstring const& sortProperty, bool isAscending)
+	IVector<WindowsSearchResultItem> WindowsSearch::GetFiles(hstring const& folderPath)
 	{
 		com_ptr<ISearchManager> searchManager;
 		HRESULT hr = CoCreateInstance(CLSID_CSearchManager, nullptr, CLSCTX_ALL, IID_PPV_ARGS(searchManager.put()));
@@ -114,14 +114,12 @@ namespace winrt::NfqReplacementLib::implementation
 			return single_threaded_vector<WindowsSearchResultItem>();
 		}
 
-		auto isAscendingStr = isAscending ? L"ASC" : L"DESC";
 		std::wstring select = L"SELECT System.ItemNameDisplay, System.ItemType, System.ItemDate, System.Photo.DateTaken, System.DateCreated, System.DateModified, System.Size, System.Image.Dimensions, System.Rating ";
 		std::wstring from = L"FROM SystemIndex ";
 		std::wstring where = std::format(L"WHERE(DIRECTORY = 'file:{}') ", folderPath);
-		std::wstring orderBy = std::format(L"ORDER BY {} {}", sortProperty, isAscendingStr);
 
 
-		auto query = select + from + where + orderBy;
+		auto query = select + from + where;
 		std::wcout << L"Query: " << query << std::endl;
 
 		com_ptr<ICommandText> commandText = unknownCommandText.as<ICommandText>();
