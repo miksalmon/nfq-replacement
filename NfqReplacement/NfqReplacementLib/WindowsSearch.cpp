@@ -115,13 +115,14 @@ namespace winrt::NfqReplacementLib::implementation
 		}
 
 		auto isAscendingStr = isAscending ? L"ASC" : L"DESC";
-		std::wstring select = L"SELECT System.ItemNameDisplay, path, System.Kind, System.Photo.DateTaken, System.DateModified, System.DateCreated ";
+		std::wstring select = L"SELECT System.ItemNameDisplay, System.ItemType, System.ItemDate, System.Photo.DateTaken, System.DateCreated, System.DateModified, System.Size, System.Image.Dimensions, System.Rating ";
 		std::wstring from = L"FROM SystemIndex ";
 		std::wstring where = std::format(L"WHERE(DIRECTORY = 'file:{}') ", folderPath);
 		std::wstring orderBy = std::format(L"ORDER BY {} {}", sortProperty, isAscendingStr);
 
 
 		auto query = select + from + where + orderBy;
+		std::wcout << L"Query: " << query << std::endl;
 
 		com_ptr<ICommandText> commandText = unknownCommandText.as<ICommandText>();
 		hr = commandText->SetCommandText(DBGUID_DEFAULT, query.c_str());
@@ -169,35 +170,72 @@ namespace winrt::NfqReplacementLib::implementation
 
 				com_ptr<IPropertyStore> propertyStore = pUnkRow.as<IPropertyStore>();
 
+				// TODO: handle hr
+				PROPVARIANT namePropVar;
+				PropVariantInit(&namePropVar);
+				hr = propertyStore->GetValue(PKEY_ItemNameDisplay, &namePropVar);
+
+				PROPVARIANT typePropVar;
+				PropVariantInit(&typePropVar);
+				hr = propertyStore->GetValue(PKEY_ItemType, &typePropVar);
+
+				PROPVARIANT itemDatePropVar;
+				PropVariantInit(&itemDatePropVar);
+				hr = propertyStore->GetValue(PKEY_ItemDate, &itemDatePropVar);
+
 				PROPVARIANT dateTakenPropVar;
 				PropVariantInit(&dateTakenPropVar);
 				hr = propertyStore->GetValue(PKEY_Photo_DateTaken, &dateTakenPropVar);
 
 				PROPVARIANT dateCreatedPropVar;
-				PropVariantInit(&dateTakenPropVar);
+				PropVariantInit(&dateCreatedPropVar);
 				hr = propertyStore->GetValue(PKEY_DateCreated, &dateCreatedPropVar);
 
 				PROPVARIANT dateModifiedPropVar;
-				PropVariantInit(&dateTakenPropVar);
+				PropVariantInit(&dateModifiedPropVar);
 				hr = propertyStore->GetValue(PKEY_DateModified, &dateModifiedPropVar);
 
-				SYSTEMTIME systemTime;
-				FileTimeToSystemTime(&dateTakenPropVar.filetime, &systemTime);
+				PROPVARIANT sizePropVar;
+				PropVariantInit(&sizePropVar);
+				hr = propertyStore->GetValue(PKEY_Size, &sizePropVar);
 
-				PROPVARIANT namePropVar;
-				PropVariantInit(&namePropVar);
-				hr = propertyStore->GetValue(PKEY_ItemNameDisplay, &namePropVar);
-				if (SUCCEEDED(hr))
-				{
-                    auto item = WindowsSearchResultItem();
-                    item.Name(winrt::hstring(namePropVar.pwszVal));
-                    item.DateCreated(winrt::clock::from_FILETIME(dateCreatedPropVar.filetime));
-                    item.DateModified(winrt::clock::from_FILETIME(dateModifiedPropVar.filetime));
-                    item.ItemDate(winrt::clock::from_FILETIME(dateTakenPropVar.filetime));
+				PROPVARIANT dimensionsPropVar;
+				PropVariantInit(&dimensionsPropVar);
+				hr = propertyStore->GetValue(PKEY_Image_Dimensions, &dimensionsPropVar);
 
-					results.Append(item);
-					PropVariantClear(&namePropVar);
-				}
+				// TODO: figure out how to get tags
+				//PROPVARIANT tagsPropVar;
+				//PropVariantInit(&tagsPropVar);
+				//hr = propertyStore->GetValue(PKEY_Tags, &tagsPropVar);
+
+				PROPVARIANT ratingPropVar;
+				PropVariantInit(&ratingPropVar);
+				hr = propertyStore->GetValue(PKEY_Rating, &ratingPropVar);
+
+				auto item = WindowsSearchResultItem();
+                item.Name(winrt::hstring(namePropVar.pwszVal));
+				item.Type(winrt::hstring(typePropVar.pwszVal));
+                item.ItemDate(winrt::clock::from_FILETIME(itemDatePropVar.filetime));
+				item.DateTaken(winrt::clock::from_FILETIME(dateTakenPropVar.filetime));
+                item.DateCreated(winrt::clock::from_FILETIME(dateCreatedPropVar.filetime));
+                item.DateModified(winrt::clock::from_FILETIME(dateModifiedPropVar.filetime));
+				item.Size(sizePropVar.uhVal.QuadPart);
+				item.Dimensions(winrt::hstring(dimensionsPropVar.pwszVal));	// TODO: fix ? in dimensions text
+				//item.Tags(winrt::hstring(L""));
+				item.Rating(ratingPropVar.uintVal);
+
+				results.Append(item);
+
+				PropVariantClear(&namePropVar);
+				PropVariantClear(&typePropVar);
+				PropVariantClear(&itemDatePropVar);
+				PropVariantClear(&dateTakenPropVar);
+				PropVariantClear(&dateCreatedPropVar);
+				PropVariantClear(&dateModifiedPropVar);
+				PropVariantClear(&sizePropVar);
+				PropVariantClear(&dimensionsPropVar);
+				//PropVariantClear(&tagsPropVar);
+				PropVariantClear(&ratingPropVar);
 			}			
 
 			rowset->ReleaseRows(rowCountReturned, rowReturned, nullptr, nullptr, nullptr);

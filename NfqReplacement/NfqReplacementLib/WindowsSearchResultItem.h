@@ -6,32 +6,49 @@ namespace winrt::NfqReplacementLib::implementation
 {
     struct WindowsSearchResultItem : WindowsSearchResultItemT<WindowsSearchResultItem>
     {
-		WindowsSearchResultItem() = default;
+        WindowsSearchResultItem() = default;
 
-		winrt::hstring Name();
-		void Name(winrt::hstring const& v);
-		winrt::hstring Path();
-		void Path(winrt::hstring const& v);
+        winrt::hstring Name();
+        void Name(winrt::hstring const& v);
 
-		winrt::hstring Kind();
-		void Kind(winrt::hstring const& v);
+        winrt::hstring Type();
+        void Type(winrt::hstring const& v);
 
-		Windows::Foundation::DateTime ItemDate();
-		void ItemDate(Windows::Foundation::DateTime const& v);
+        Windows::Foundation::DateTime ItemDate();
+        void ItemDate(Windows::Foundation::DateTime const& v);
 
-		Windows::Foundation::DateTime DateModified();
-		void DateModified(Windows::Foundation::DateTime const& v);
+        Windows::Foundation::DateTime DateTaken();
+        void DateTaken(Windows::Foundation::DateTime const& v);
 
-		Windows::Foundation::DateTime DateCreated();
-		void DateCreated(Windows::Foundation::DateTime const& v);
+        Windows::Foundation::DateTime DateModified();
+        void DateModified(Windows::Foundation::DateTime const& v);
 
-    private :
-		winrt::hstring m_name;
-		winrt::hstring m_path;
-		winrt::hstring m_kind;
-		Windows::Foundation::DateTime m_itemDate;
-		Windows::Foundation::DateTime m_dateModified;
-		Windows::Foundation::DateTime m_dateCreated;
+        Windows::Foundation::DateTime DateCreated();
+        void DateCreated(Windows::Foundation::DateTime const& v);
+
+        uint64_t Size();
+        void Size(uint64_t v);
+
+        winrt::hstring Dimensions();
+        void Dimensions(winrt::hstring const& v);
+
+        winrt::hstring Tags();
+        void Tags(winrt::hstring const& v);
+
+        uint32_t Rating();
+        void Rating(uint32_t v);
+
+    private:
+        winrt::hstring m_name;
+        winrt::hstring m_type;
+        Windows::Foundation::DateTime m_itemDate;
+        Windows::Foundation::DateTime m_dateModified;
+        Windows::Foundation::DateTime m_dateCreated;
+        winrt::hstring m_tags;
+        uint64_t m_size;
+        Windows::Foundation::DateTime m_dateTaken;
+        winrt::hstring m_dimensions;
+        uint32_t m_rating;
     };
 }
 

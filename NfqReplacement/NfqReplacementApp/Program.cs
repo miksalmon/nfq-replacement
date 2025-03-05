@@ -28,21 +28,28 @@ internal class Program
         stopWatch.Reset();
 
         stopWatch.Start();
+        Console.WriteLine($"Using Windows Search Indexer.");
         // TODO: plug ascending or descending order here
         var files = WindowsSearch.GetFiles(folderPath, sort.PropertyKey, sort.Ascending);
         files = files.OrderBy(x => x.DateCreated).ToList();
         stopWatch.Stop();
-        Console.WriteLine($"Using Windows Search Indexer.");
         Console.WriteLine($"Found {files.Count} files.");
         Console.WriteLine($"Search time: {stopWatch.ElapsedMilliseconds}ms.\n");
 
         foreach (var file in files)
         {
             Console.WriteLine($"Name: {file.Name}");
-            Console.WriteLine($"Kind: {file.Kind}");
+            Console.WriteLine($"Type: {file.Type}");
             Console.WriteLine($"ItemDate: {file.ItemDate}");
+            Console.WriteLine($"DateTaken: {file.DateTaken}");
             Console.WriteLine($"DateModified: {file.DateModified}");
             Console.WriteLine($"DateCreated: {file.DateCreated}");
+            Console.WriteLine($"Size: {file.Size}");
+            Console.WriteLine($"Dimensions: {file.Dimensions}");
+            //Console.WriteLine($"Tags: {file.Tags}");
+            Console.WriteLine($"Rating: {file.Rating}");
+
+            Console.WriteLine();
         }
         Console.WriteLine();
 

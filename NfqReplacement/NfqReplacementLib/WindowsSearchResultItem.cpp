@@ -16,24 +16,14 @@ namespace winrt::NfqReplacementLib::implementation
 		m_name = v;
 	}
 
-	winrt::hstring WindowsSearchResultItem::Path()
+	winrt::hstring WindowsSearchResultItem::Type()
 	{
-		return m_path;
+		return m_type;
 	}
 
-	void WindowsSearchResultItem::Path(winrt::hstring const& v)
+	void WindowsSearchResultItem::Type(winrt::hstring const& v)
 	{
-		m_path = v;
-	}
-
-	winrt::hstring WindowsSearchResultItem::Kind()
-	{
-		return m_kind;
-	}
-
-	void WindowsSearchResultItem::Kind(winrt::hstring const& v)
-	{
-		m_kind = v;
+		m_type = v;
 	}
 
 	Windows::Foundation::DateTime WindowsSearchResultItem::ItemDate()
@@ -44,6 +34,16 @@ namespace winrt::NfqReplacementLib::implementation
 	void WindowsSearchResultItem::ItemDate(Windows::Foundation::DateTime const& v)
 	{
 		m_itemDate = v;
+	}
+
+	Windows::Foundation::DateTime WindowsSearchResultItem::DateTaken()
+	{
+		return m_dateTaken;
+	}
+
+	void WindowsSearchResultItem::DateTaken(Windows::Foundation::DateTime const& v)
+	{
+		m_dateTaken = v;
 	}
 
 	Windows::Foundation::DateTime WindowsSearchResultItem::DateModified()
@@ -64,5 +64,45 @@ namespace winrt::NfqReplacementLib::implementation
 	void WindowsSearchResultItem::DateCreated(Windows::Foundation::DateTime const& v)
 	{
 		m_dateCreated = v;
+	}
+
+	uint64_t WindowsSearchResultItem::Size()
+	{
+		return m_size;
+	}
+
+	void WindowsSearchResultItem::Size(uint64_t v)
+	{
+		m_size = v;
+	}
+
+	winrt::hstring WindowsSearchResultItem::Dimensions()
+	{
+		return m_dimensions;
+	}
+
+	void WindowsSearchResultItem::Dimensions(winrt::hstring const& v)
+	{
+		m_dimensions = v;
+	}
+
+	winrt::hstring WindowsSearchResultItem::Tags()
+	{
+		return m_tags;
+	}
+
+	void WindowsSearchResultItem::Tags(winrt::hstring const& v)
+	{
+		m_tags = v;
+	}
+
+	uint32_t WindowsSearchResultItem::Rating()
+	{
+		return m_rating;
+	}
+
+	void WindowsSearchResultItem::Rating(uint32_t v)
+	{
+		m_rating = v;
 	}
 }
