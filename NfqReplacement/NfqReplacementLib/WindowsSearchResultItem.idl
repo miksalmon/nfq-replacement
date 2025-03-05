@@ -14,7 +14,7 @@ namespace NfqReplacementLib
         Windows.Foundation.DateTime DateCreated{ get; set; };        
         UInt64 Size{ get; set; };
         String Dimensions{ get; set; };
-        String Tags{ get; set; };
+        Windows.Foundation.Collections.IVector<String> Tags{ get; set; };
         UInt32 Rating{ get; set; };
     }
 }

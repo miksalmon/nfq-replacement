@@ -86,12 +86,12 @@ namespace winrt::NfqReplacementLib::implementation
 		m_dimensions = v;
 	}
 
-	winrt::hstring WindowsSearchResultItem::Tags()
+	Windows::Foundation::Collections::IVector<winrt::hstring> WindowsSearchResultItem::Tags()
 	{
 		return m_tags;
 	}
 
-	void WindowsSearchResultItem::Tags(winrt::hstring const& v)
+	void WindowsSearchResultItem::Tags(Windows::Foundation::Collections::IVector<winrt::hstring> const& v)
 	{
 		m_tags = v;
 	}

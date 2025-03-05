@@ -32,8 +32,8 @@ namespace winrt::NfqReplacementLib::implementation
         winrt::hstring Dimensions();
         void Dimensions(winrt::hstring const& v);
 
-        winrt::hstring Tags();
-        void Tags(winrt::hstring const& v);
+        Windows::Foundation::Collections::IVector<winrt::hstring> Tags();
+        void Tags(Windows::Foundation::Collections::IVector<winrt::hstring> const& v);
 
         uint32_t Rating();
         void Rating(uint32_t v);
@@ -44,7 +44,7 @@ namespace winrt::NfqReplacementLib::implementation
         Windows::Foundation::DateTime m_itemDate;
         Windows::Foundation::DateTime m_dateModified;
         Windows::Foundation::DateTime m_dateCreated;
-        winrt::hstring m_tags;
+        Windows::Foundation::Collections::IVector<winrt::hstring> m_tags;
         uint64_t m_size;
         Windows::Foundation::DateTime m_dateTaken;
         winrt::hstring m_dimensions;

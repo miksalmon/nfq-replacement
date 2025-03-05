@@ -114,7 +114,7 @@ namespace winrt::NfqReplacementLib::implementation
 			return single_threaded_vector<WindowsSearchResultItem>();
 		}
 
-		std::wstring select = L"SELECT System.ItemNameDisplay, System.ItemType, System.ItemDate, System.Photo.DateTaken, System.DateCreated, System.DateModified, System.Size, System.Image.Dimensions, System.Rating ";
+		std::wstring select = L"SELECT System.ItemNameDisplay, System.ItemType, System.ItemDate, System.Photo.DateTaken, System.DateCreated, System.DateModified, System.Size, System.Image.Dimensions, System.Keywords, System.Rating ";
 		std::wstring from = L"FROM SystemIndex ";
 		std::wstring where = std::format(L"WHERE(DIRECTORY = 'file:{}') ", folderPath);
 
@@ -201,10 +201,9 @@ namespace winrt::NfqReplacementLib::implementation
 				PropVariantInit(&dimensionsPropVar);
 				hr = propertyStore->GetValue(PKEY_Image_Dimensions, &dimensionsPropVar);
 
-				// TODO: figure out how to get tags
-				//PROPVARIANT tagsPropVar;
-				//PropVariantInit(&tagsPropVar);
-				//hr = propertyStore->GetValue(PKEY_Tags, &tagsPropVar);
+				PROPVARIANT tagsPropVar;
+				PropVariantInit(&tagsPropVar);
+				hr = propertyStore->GetValue(PKEY_Keywords, &tagsPropVar);
 
 				PROPVARIANT ratingPropVar;
 				PropVariantInit(&ratingPropVar);
@@ -219,7 +218,13 @@ namespace winrt::NfqReplacementLib::implementation
                 item.DateModified(winrt::clock::from_FILETIME(dateModifiedPropVar.filetime));
 				item.Size(sizePropVar.uhVal.QuadPart);
 				item.Dimensions(winrt::hstring(dimensionsPropVar.pwszVal));	// TODO: fix ? in dimensions text
-				//item.Tags(winrt::hstring(L""));
+
+				IVector tagsVector = winrt::single_threaded_vector<winrt::hstring>();
+				for (ULONG j = 0; j < tagsPropVar.calpwstr.cElems; j++) {
+					auto tag = tagsPropVar.calpwstr.pElems[j];
+					tagsVector.Append(winrt::hstring(tag));
+				}
+				item.Tags(tagsVector);
 				item.Rating(ratingPropVar.uintVal);
 
 				results.Append(item);
@@ -232,7 +237,7 @@ namespace winrt::NfqReplacementLib::implementation
 				PropVariantClear(&dateModifiedPropVar);
 				PropVariantClear(&sizePropVar);
 				PropVariantClear(&dimensionsPropVar);
-				//PropVariantClear(&tagsPropVar);
+				PropVariantClear(&tagsPropVar);
 				PropVariantClear(&ratingPropVar);
 			}			
 

@@ -52,7 +52,7 @@ internal class Program
         Console.WriteLine($"Total time: {totalTime}ms\n");
 
         Console.WriteLine("Results:");
-        //PrintResults(files);
+        PrintResults(files);
         Console.WriteLine();
 
         Console.WriteLine("Press any key to exit...");
@@ -61,15 +61,6 @@ internal class Program
 
     private static IList<WindowsSearchResultItem> SortSearchResults(IList<WindowsSearchResultItem> results, FileExplorerSort sort)
     {
-        var getSortParameter = IComparable (WindowsSearchResultItem result, string propertyKey) => propertyKey switch
-        {
-            "System.ItemNameDisplay" => result.Name,
-            "System.ItemDate" => result.ItemDate,
-            "System.DateModified" => result.DateModified,
-            "System.DateCreated" => result.DateCreated,
-            _ => result.Name
-        };
-
         IEnumerable<WindowsSearchResultItem> sortedFiles;
         
         switch(sort.PropertyKey)
@@ -124,7 +115,7 @@ internal class Program
         Console.WriteLine($"DateCreated: {file.DateCreated}");
         Console.WriteLine($"Size: {file.Size}");
         Console.WriteLine($"Dimensions: {file.Dimensions}");
-        //Console.WriteLine($"Tags: {file.Tags}");
+        Console.WriteLine($"Tags: {string.Join("; ", file.Tags)}");
         Console.WriteLine($"Rating: {file.Rating}");
     }
 }
