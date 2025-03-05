@@ -1,0 +1,16 @@
+namespace NfqReplacementLib
+{
+    [bindable]
+    [default_interface]
+    runtimeclass WindowsSearchResultItem 
+    {
+        WindowsSearchResultItem();
+
+        String Name{ get; set;  };
+        String Path{ get; set; };
+        String Kind{ get; set; };
+        Windows.Foundation.DateTime ItemDate{ get; set; };
+        Windows.Foundation.DateTime DateModified{ get; set; };
+        Windows.Foundation.DateTime DateCreated{ get; set; };
+    }
+}

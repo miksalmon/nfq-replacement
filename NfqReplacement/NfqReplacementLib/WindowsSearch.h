@@ -6,7 +6,7 @@ namespace winrt::NfqReplacementLib::implementation
 {
     struct WindowsSearch : WindowsSearchT<WindowsSearch>
     {
-        static Windows::Foundation::Collections::IVector<hstring> GetFiles(hstring const& folderPath, hstring const& sortProperty);
+        static Windows::Foundation::Collections::IVector<WindowsSearchResultItem> GetFiles(hstring const& folderPath, hstring const& sortProperty, bool isAscending);
     };
 }
 

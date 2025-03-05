@@ -1,9 +1,11 @@
+import "WindowsSearchResultItem.idl";
+
 namespace NfqReplacementLib
 {
     [bindable]
     [default_interface]
     static runtimeclass WindowsSearch 
     {
-        static Windows.Foundation.Collections.IVector<String> GetFiles(String folderPath, String sortProperty);
+        static Windows.Foundation.Collections.IVector<WindowsSearchResultItem> GetFiles(String folderPath, String sortProperty, Boolean isAscending);
     }
 }

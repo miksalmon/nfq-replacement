@@ -98,6 +98,10 @@
       <DependentUpon>WindowsSearch.idl</DependentUpon>
       <SubType>Code</SubType>
     </ClInclude>
+    <ClInclude Include="WindowsSearchResultItem.h">
+      <DependentUpon>WindowsSearchResultItem.idl</DependentUpon>
+      <SubType>Code</SubType>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FileExplorer.cpp">
@@ -117,6 +121,10 @@
     <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
     <ClCompile Include="WindowsSearch.cpp">
       <DependentUpon>WindowsSearch.idl</DependentUpon>
+      <SubType>Code</SubType>
+    </ClCompile>
+    <ClCompile Include="WindowsSearchResultItem.cpp">
+      <DependentUpon>WindowsSearchResultItem.idl</DependentUpon>
       <SubType>Code</SubType>
     </ClCompile>
   </ItemGroup>
@@ -141,6 +149,9 @@
       <SubType>Designer</SubType>
     </Midl>
     <Midl Include="WindowsSearch.idl">
+      <SubType>Designer</SubType>
+    </Midl>
+    <Midl Include="WindowsSearchResultItem.idl">
       <SubType>Designer</SubType>
     </Midl>
   </ItemGroup>
