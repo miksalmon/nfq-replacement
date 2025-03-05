@@ -30,6 +30,7 @@ internal class Program
         stopWatch.Start();
         // TODO: plug ascending or descending order here
         var files = WindowsSearch.GetFiles(folderPath, sort.PropertyKey, sort.Ascending);
+        files = files.OrderBy(x => x.DateCreated).ToList();
         stopWatch.Stop();
         Console.WriteLine($"Using Windows Search Indexer.");
         Console.WriteLine($"Found {files.Count} files.");
@@ -38,13 +39,13 @@ internal class Program
         foreach (var file in files)
         {
             Console.WriteLine($"Name: {file.Name}");
-            Console.WriteLine($"Path: {file.Path}");
-            Console.WriteLine($"Kind: {file.Kind}");
-            Console.WriteLine($"ItemDate: {file.ItemDate}");
-            Console.WriteLine($"DateModified: {file.DateModified}");
-            Console.WriteLine($"DateCreated: {file.DateCreated}");
-
+            //Console.WriteLine($"Path: {file.Path}");
+            //Console.WriteLine($"Kind: {file.Kind}");
+            //Console.WriteLine($"ItemDate: {file.ItemDate}");
+            //Console.WriteLine($"DateModified: {file.DateModified}");
+            //Console.WriteLine($"DateCreated: {file.DateCreated}");
         }
+
         Console.WriteLine();
 
         Console.WriteLine("Press any key to exit...");
