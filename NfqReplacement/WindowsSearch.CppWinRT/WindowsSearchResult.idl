@@ -1,5 +1,5 @@
 import "WindowsSearchResultStatus.idl";
-import "WindowsSearchResultItem.idl";
+import "FileSystemItem.idl";
 
 namespace WindowsSearch
 {
@@ -8,9 +8,9 @@ namespace WindowsSearch
     runtimeclass WindowsSearchResult 
     {
         WindowsSearchResult(WindowsSearchResultStatus status);
-        WindowsSearchResult(WindowsSearchResultStatus status, Windows.Foundation.Collections.IVector<WindowsSearchResultItem> items);
+        WindowsSearchResult(WindowsSearchResultStatus status, Windows.Foundation.Collections.IVector<FileSystemItem> items);
 
         WindowsSearchResultStatus Status{ get; };
-        Windows.Foundation.Collections.IVector<WindowsSearchResultItem> Items{ get; };
+        Windows.Foundation.Collections.IVector<FileSystemItem> Items{ get; };
     }
 }

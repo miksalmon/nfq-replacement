@@ -22,14 +22,6 @@ namespace winrt::WindowsSearch::implementation
 {
     __declspec(selectany) CLSID CLSID_CollatorDataSource = { 0x9E175B8B, 0xF52A, 0x11D8, 0xB9, 0xA5, 0x50, 0x50, 0x54, 0x50, 0x30, 0x30 };
 
-    // Define column indices (manually mapped to your SELECT statement order)
-    constexpr DBORDINAL COL_ItemName = 1;
-    constexpr DBORDINAL COL_Path = 2;
-    constexpr DBORDINAL COL_Kind = 3;
-    constexpr DBORDINAL COL_ItemDate = 4;
-    constexpr DBORDINAL COL_DateModified = 5;
-    constexpr DBORDINAL COL_DateCreated = 6;
-
     WindowsSearchResult WindowsSearcher::GetFiles(hstring const& folderPath)
     {
         com_ptr<ISearchManager> searchManager;
@@ -114,10 +106,9 @@ namespace winrt::WindowsSearch::implementation
             return WindowsSearchResult(WindowsSearchResultStatus::UnknownError);
         }
 
-        std::wstring select = L"SELECT System.ItemNameDisplay, System.ItemType, System.ItemDate, System.Photo.DateTaken, System.DateCreated, System.DateModified, System.Size, System.Image.Dimensions, System.Keywords, System.Rating ";
+        std::wstring select = L"SELECT System.ItemNameDisplay, System.ItemPathDisplay, System.ItemType, System.ItemDate, System.Photo.DateTaken, System.DateCreated, System.DateModified, System.Size, System.Image.Dimensions, System.Keywords, System.Rating ";
         std::wstring from = L"FROM SystemIndex ";
         std::wstring where = std::format(L"WHERE(DIRECTORY = 'file:{}') ", folderPath);
-
 
         auto query = select + from + where;
         std::wcout << L"Query: " << query << std::endl;
@@ -143,7 +134,7 @@ namespace winrt::WindowsSearch::implementation
         com_ptr<IGetRow> getRow = rowset.as<IGetRow>();
 
         DBCOUNTITEM rowCountReturned;
-        IVector<WindowsSearchResultItem> results = single_threaded_vector<WindowsSearchResultItem>();
+        IVector<FileSystemItem> results = single_threaded_vector<FileSystemItem>();
 
         do
         {
@@ -171,6 +162,10 @@ namespace winrt::WindowsSearch::implementation
                 PROPVARIANT namePropVar;
                 PropVariantInit(&namePropVar);
                 hr = propertyStore->GetValue(PKEY_ItemNameDisplay, &namePropVar);
+
+                PROPVARIANT pathPropVar;
+                PropVariantInit(&pathPropVar);
+                hr = propertyStore->GetValue(PKEY_ItemPathDisplay, &pathPropVar);
 
                 PROPVARIANT typePropVar;
                 PropVariantInit(&typePropVar);
@@ -208,8 +203,9 @@ namespace winrt::WindowsSearch::implementation
                 PropVariantInit(&ratingPropVar);
                 hr = propertyStore->GetValue(PKEY_Rating, &ratingPropVar);
 
-                auto item = WindowsSearchResultItem();
+                auto item = FileSystemItem();
                 item.Name(winrt::hstring(namePropVar.pwszVal));
+                item.Path(winrt::hstring(pathPropVar.pwszVal));
                 item.Type(winrt::hstring(typePropVar.pwszVal));
                 item.ItemDate(winrt::clock::from_FILETIME(itemDatePropVar.filetime));
                 item.DateTaken(winrt::clock::from_FILETIME(dateTakenPropVar.filetime));
@@ -229,6 +225,7 @@ namespace winrt::WindowsSearch::implementation
                 results.Append(item);
 
                 PropVariantClear(&namePropVar);
+                PropVariantClear(&pathPropVar);
                 PropVariantClear(&typePropVar);
                 PropVariantClear(&itemDatePropVar);
                 PropVariantClear(&dateTakenPropVar);

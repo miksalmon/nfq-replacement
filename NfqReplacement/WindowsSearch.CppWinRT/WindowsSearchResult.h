@@ -7,15 +7,15 @@ namespace winrt::WindowsSearch::implementation
     struct WindowsSearchResult : WindowsSearchResultT<WindowsSearchResult>
     {
         WindowsSearchResult(WindowsSearchResultStatus status);
-        WindowsSearchResult(WindowsSearchResultStatus status, Windows::Foundation::Collections::IVector<WindowsSearchResultItem> items);
+        WindowsSearchResult(WindowsSearchResultStatus status, Windows::Foundation::Collections::IVector<FileSystemItem> items);
         
         WindowsSearchResultStatus Status() const;
 
-        Windows::Foundation::Collections::IVector<WindowsSearchResultItem> Items() const;
+        Windows::Foundation::Collections::IVector<FileSystemItem> Items() const;
 
     private:
         WindowsSearchResultStatus m_status{WindowsSearchResultStatus::Success};
-        Windows::Foundation::Collections::IVector<WindowsSearchResultItem> m_items;
+        Windows::Foundation::Collections::IVector<FileSystemItem> m_items;
     };
 }
 

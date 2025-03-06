@@ -2,17 +2,20 @@ namespace WindowsSearch
 {
     [bindable]
     [default_interface]
-    runtimeclass WindowsSearchResultItem 
+    runtimeclass FileSystemItem 
     {
-        WindowsSearchResultItem();
+        FileSystemItem();
 
         String Name{ get; set;  };
+        String Path{ get; set; };
+
         String Type{ get; set; };
+        Windows.Foundation.DateTime DateModified{ get; set; };
+        Windows.Foundation.DateTime DateCreated{ get; set; };
+        UInt64 Size{ get; set; };
+
         Windows.Foundation.DateTime ItemDate{ get; set; };
         Windows.Foundation.DateTime DateTaken{ get; set; };
-        Windows.Foundation.DateTime DateModified{ get; set; };
-        Windows.Foundation.DateTime DateCreated{ get; set; };        
-        UInt64 Size{ get; set; };
         String Dimensions{ get; set; };
         Windows.Foundation.Collections.IVector<String> Tags{ get; set; };
         UInt32 Rating{ get; set; };

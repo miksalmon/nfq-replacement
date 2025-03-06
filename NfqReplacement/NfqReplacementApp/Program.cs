@@ -39,7 +39,7 @@ internal class Program
             return;
         }
 
-        IList<WindowsSearchResultItem> files = result.Items;
+        IList<FileSystemItem> files = result.Items;
 
         stopWatch.Stop();
         var queryTime = stopWatch.ElapsedMilliseconds;
@@ -70,7 +70,7 @@ internal class Program
         Console.ReadLine();
     }
 
-    private static void PrintResults(IList<WindowsSearchResultItem> files)
+    private static void PrintResults(IList<FileSystemItem> files)
     {
         foreach (var file in files)
         {
@@ -80,9 +80,10 @@ internal class Program
         }
     }
 
-    private static void PrintFileProperties(WindowsSearchResultItem file)
+    private static void PrintFileProperties(FileSystemItem file)
     {
         Console.WriteLine($"Name: {file.Name}");
+        Console.WriteLine($"Path: {file.Path}");
         Console.WriteLine($"Type: {file.Type}");
         Console.WriteLine($"ItemDate: {file.ItemDate}");
         Console.WriteLine($"DateTaken: {file.DateTaken}");

@@ -104,8 +104,8 @@
       <DependentUpon>WindowsSearchResult.idl</DependentUpon>
       <SubType>Code</SubType>
     </ClInclude>
-    <ClInclude Include="WindowsSearchResultItem.h">
-      <DependentUpon>WindowsSearchResultItem.idl</DependentUpon>
+    <ClInclude Include="FileSystemItem.h">
+      <DependentUpon>FileSystemItem.idl</DependentUpon>
       <SubType>Code</SubType>
     </ClInclude>
   </ItemGroup>
@@ -133,8 +133,8 @@
       <DependentUpon>WindowsSearchResult.idl</DependentUpon>
       <SubType>Code</SubType>
     </ClCompile>
-    <ClCompile Include="WindowsSearchResultItem.cpp">
-      <DependentUpon>WindowsSearchResultItem.idl</DependentUpon>
+    <ClCompile Include="FileSystemItem.cpp">
+      <DependentUpon>FileSystemItem.idl</DependentUpon>
       <SubType>Code</SubType>
     </ClCompile>
   </ItemGroup>
@@ -164,7 +164,7 @@
     <Midl Include="WindowsSearchResult.idl">
       <SubType>Designer</SubType>
     </Midl>
-    <Midl Include="WindowsSearchResultItem.idl">
+    <Midl Include="FileSystemItem.idl">
       <SubType>Designer</SubType>
     </Midl>
     <Midl Include="WindowsSearchResultStatus.idl">

@@ -24,11 +24,11 @@
     <Natvis Include="$(MSBuildThisFileDirectory)..\..\natvis\wil.natvis" />
   </ItemGroup>
   <ItemGroup>
-    <Midl Include="WindowsSearch.idl" />
     <Midl Include="FileExplorer.idl" />
     <Midl Include="FileExplorerSort.idl" />
-    <Midl Include="WindowsSearchResultItem.idl" />
+    <Midl Include="FileSystemItem.idl" />
     <Midl Include="WindowsSearchResult.idl" />
     <Midl Include="WindowsSearchResultStatus.idl" />
+    <Midl Include="WindowsSearcher.idl" />
   </ItemGroup>
 </Project>

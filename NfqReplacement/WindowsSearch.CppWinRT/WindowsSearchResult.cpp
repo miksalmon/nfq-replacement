@@ -9,10 +9,10 @@ namespace winrt::WindowsSearch::implementation
     WindowsSearchResult::WindowsSearchResult(WindowsSearchResultStatus status)
     {
         m_status = status;
-        m_items = single_threaded_vector<WindowsSearchResultItem>();
+        m_items = single_threaded_vector<FileSystemItem>();
     }
 
-    WindowsSearchResult::WindowsSearchResult(WindowsSearchResultStatus status, Windows::Foundation::Collections::IVector<WindowsSearchResultItem> items)
+    WindowsSearchResult::WindowsSearchResult(WindowsSearchResultStatus status, Windows::Foundation::Collections::IVector<FileSystemItem> items)
     {
         m_status = status;
         m_items = items;
@@ -23,7 +23,7 @@ namespace winrt::WindowsSearch::implementation
         return m_status;
     }
 
-    Windows::Foundation::Collections::IVector<WindowsSearchResultItem> WindowsSearchResult::Items() const
+    Windows::Foundation::Collections::IVector<FileSystemItem> WindowsSearchResult::Items() const
     {
         return m_items;
     }

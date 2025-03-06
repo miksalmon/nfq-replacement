@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace NfqReplacementApp.Extensions
 {
-    public static class WindowsSearchResultItemExtensions
+    public static class FileSystemItemExtensions
     {
         public static readonly HashSet<string> SupportedFileTypes = new HashSet<string>
         {
@@ -23,14 +23,14 @@ namespace NfqReplacementApp.Extensions
             ".3g2", ".3gp", ".3gp2", ".3gpp", ".asf", ".avi", ".m2t", ".m2ts", ".m4v", ".mkv", ".mov", ".mp4", ".mp4v", ".mts", ".wm", ".wmv"
         };
 
-        public static bool IsSupportedFileType(this WindowsSearchResultItem item)
+        public static bool IsSupportedFileType(this FileSystemItem item)
         {
             return SupportedFileTypes.Contains(item.Type);
         }
 
-        public static IEnumerable<WindowsSearchResultItem> Sort(this IEnumerable<WindowsSearchResultItem> results, FileExplorerSort sort)
+        public static IEnumerable<FileSystemItem> Sort(this IEnumerable<FileSystemItem> results, FileExplorerSort sort)
         {
-            IEnumerable<WindowsSearchResultItem> sortedFiles;
+            IEnumerable<FileSystemItem> sortedFiles;
 
             switch (sort.PropertyKey)
             {

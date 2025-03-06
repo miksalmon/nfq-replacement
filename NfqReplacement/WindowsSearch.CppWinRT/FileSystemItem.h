@@ -1,15 +1,18 @@
 ﻿#pragma once
 
-#include "WindowsSearchResultItem.g.h"
+#include "FileSystemItem.g.h"
 
 namespace winrt::WindowsSearch::implementation
 {
-    struct WindowsSearchResultItem : WindowsSearchResultItemT<WindowsSearchResultItem>
+    struct FileSystemItem : FileSystemItemT<FileSystemItem>
     {
-        WindowsSearchResultItem() = default;
+        FileSystemItem() = default;
 
         winrt::hstring Name() const;
         void Name(winrt::hstring const& v);
+
+        winrt::hstring Path() const;
+        void Path(winrt::hstring const& v);
 
         winrt::hstring Type() const;
         void Type(winrt::hstring const& v);
@@ -40,6 +43,7 @@ namespace winrt::WindowsSearch::implementation
 
     private:
         winrt::hstring m_name;
+        winrt::hstring m_path;
         winrt::hstring m_type;
         Windows::Foundation::DateTime m_itemDate;
         Windows::Foundation::DateTime m_dateModified;
@@ -54,7 +58,7 @@ namespace winrt::WindowsSearch::implementation
 
 namespace winrt::WindowsSearch::factory_implementation
 {
-    struct WindowsSearchResultItem : WindowsSearchResultItemT<WindowsSearchResultItem, implementation::WindowsSearchResultItem>
+    struct FileSystemItem : FileSystemItemT<FileSystemItem, implementation::FileSystemItem>
     {
     };
 }

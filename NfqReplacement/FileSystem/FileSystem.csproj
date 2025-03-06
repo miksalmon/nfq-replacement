@@ -1,0 +1,9 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <Import Project="..\Props\CSharp.WASDK.props" />
+
+    <ItemGroup>
+      <ProjectReference Include="..\WindowsSearch.CsWinRT\WindowsSearch.CsWinRT.csproj" />
+    </ItemGroup>
+    
+</Project>
