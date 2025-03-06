@@ -1,6 +1,6 @@
 import "FileExplorerSort.idl";
 
-namespace NfqReplacementLib
+namespace WindowsSearch
 {
     [bindable]
     [default_interface]

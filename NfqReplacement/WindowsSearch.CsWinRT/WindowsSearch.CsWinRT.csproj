@@ -3,7 +3,7 @@
   <Import Project="..\Props\CSharp.WASDK.props" />
 
   <ItemGroup>
-    <ProjectReference Include="..\NfqReplacementLib\NfqReplacementLib.vcxproj" />
+    <ProjectReference Include="..\WindowsSearch.CppWinRT\WindowsSearch.CppWinRT.vcxproj" />
   </ItemGroup>
 
   <ImportGroup Label="PropertySheets">
@@ -13,7 +13,7 @@
   <!--CsWinRT properties-->
   <PropertyGroup>
     <!--Specify namespaces to create a C# projection for-->
-    <CsWinRTIncludes>NfqReplacementLib;</CsWinRTIncludes>
+    <CsWinRTIncludes>WindowsSearch;</CsWinRTIncludes>
     <!--Set output path for generated source files/projection dll to OutDir (defined in Directory.Build.props)-->
     <CsWinRTGeneratedFilesDir>$(OutDir)</CsWinRTGeneratedFilesDir>
   </PropertyGroup>

@@ -4,7 +4,7 @@
 #include "WindowsSearchResultItem.g.cpp"
 #endif
 
-namespace winrt::NfqReplacementLib::implementation
+namespace winrt::WindowsSearch::implementation
 {
 	winrt::hstring WindowsSearchResultItem::Name() const
 	{

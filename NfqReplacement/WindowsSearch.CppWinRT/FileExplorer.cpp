@@ -4,7 +4,7 @@
 #include "FileExplorer.g.cpp"
 #endif
 
-namespace winrt::NfqReplacementLib::implementation
+namespace winrt::WindowsSearch::implementation
 {
     hstring FileExplorer::GetFolder()
     {

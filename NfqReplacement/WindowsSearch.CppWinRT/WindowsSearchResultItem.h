@@ -2,7 +2,7 @@
 
 #include "WindowsSearchResultItem.g.h"
 
-namespace winrt::NfqReplacementLib::implementation
+namespace winrt::WindowsSearch::implementation
 {
     struct WindowsSearchResultItem : WindowsSearchResultItemT<WindowsSearchResultItem>
     {
@@ -52,7 +52,7 @@ namespace winrt::NfqReplacementLib::implementation
     };
 }
 
-namespace winrt::NfqReplacementLib::factory_implementation
+namespace winrt::WindowsSearch::factory_implementation
 {
     struct WindowsSearchResultItem : WindowsSearchResultItemT<WindowsSearchResultItem, implementation::WindowsSearchResultItem>
     {

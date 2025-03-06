@@ -1,4 +1,4 @@
-﻿using NfqReplacementLib;
+﻿using WindowsSearch;
 using System;
 using System.Collections.Generic;
 using System.Linq;

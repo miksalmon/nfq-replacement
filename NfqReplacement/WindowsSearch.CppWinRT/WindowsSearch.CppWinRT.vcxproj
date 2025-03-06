@@ -10,7 +10,8 @@
     <CppWinRTGenerateWindowsMetadata>true</CppWinRTGenerateWindowsMetadata>
     <MinimalCoreWin>true</MinimalCoreWin>
     <ProjectGuid>{b0bdd988-d8dd-4f64-851b-c08d0ec81905}</ProjectGuid>
-    <RootNamespace>NfqReplacementLib</RootNamespace>
+    <ProjectName>WindowsSearch.CppWinRT</ProjectName>
+    <RootNamespace>WindowsSearch</RootNamespace>
     <DefaultLanguage>en-US</DefaultLanguage>
     <ApplicationType>Windows Store</ApplicationType>
     <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
@@ -63,7 +64,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateWindowsMetadata>false</GenerateWindowsMetadata>
-      <ModuleDefinitionFile>NfqReplacementLib.def</ModuleDefinitionFile>
+      <ModuleDefinitionFile>WindowsSearch.CppWinRT.def</ModuleDefinitionFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)'=='Debug'">
@@ -95,8 +96,8 @@
       <SubType>Code</SubType>
     </ClInclude>
     <ClInclude Include="pch.h" />
-    <ClInclude Include="WindowsSearch.h">
-      <DependentUpon>WindowsSearch.idl</DependentUpon>
+    <ClInclude Include="WindowsSearcher.h">
+      <DependentUpon>WindowsSearcher.idl</DependentUpon>
       <SubType>Code</SubType>
     </ClInclude>
     <ClInclude Include="WindowsSearchResult.h">
@@ -124,8 +125,8 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
-    <ClCompile Include="WindowsSearch.cpp">
-      <DependentUpon>WindowsSearch.idl</DependentUpon>
+    <ClCompile Include="WindowsSearcher.cpp">
+      <DependentUpon>WindowsSearcher.idl</DependentUpon>
       <SubType>Code</SubType>
     </ClCompile>
     <ClCompile Include="WindowsSearchResult.cpp">
@@ -138,7 +139,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="NfqReplacementLib.def" />
+    <None Include="WindowsSearch.CppWinRT.def" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -148,7 +149,7 @@
     <Version Condition="'$(Version)' == ''">0.0.0.0</Version>
   </PropertyGroup>
   <ItemGroup>
-    <ResourceCompile Include="NfqReplacementLib.rc" PreprocessorDefinitions="%(PreprocessorDefinitions);APP_VERSION_MAJOR=$(Version.Split(`.`)[0]);APP_VERSION_MINOR=$(Version.Split(`.`)[1]);APP_VERSION_BUILD=$(Version.Split(`.`)[2]);APP_VERSION_REVISION=$(Version.Split(`.`)[3])" />
+    <ResourceCompile Include="WindowsSearch.CppWinRT.rc" PreprocessorDefinitions="%(PreprocessorDefinitions);APP_VERSION_MAJOR=$(Version.Split(`.`)[0]);APP_VERSION_MINOR=$(Version.Split(`.`)[1]);APP_VERSION_BUILD=$(Version.Split(`.`)[2]);APP_VERSION_REVISION=$(Version.Split(`.`)[3])" />
   </ItemGroup>
   <ItemGroup>
     <Midl Include="FileExplorer.idl">
@@ -157,7 +158,7 @@
     <Midl Include="FileExplorerSort.idl">
       <SubType>Designer</SubType>
     </Midl>
-    <Midl Include="WindowsSearch.idl">
+    <Midl Include="WindowsSearcher.idl">
       <SubType>Designer</SubType>
     </Midl>
     <Midl Include="WindowsSearchResult.idl">

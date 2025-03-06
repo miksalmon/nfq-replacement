@@ -1,7 +1,7 @@
 ﻿#include "pch.h"
-#include "WindowsSearch.h"
-#if __has_include("WindowsSearch.g.cpp")
-#include "WindowsSearch.g.cpp"
+#include "WindowsSearcher.h"
+#if __has_include("WindowsSearcher.g.cpp")
+#include "WindowsSearcher.g.cpp"
 #endif
 
 #include <winrt/base.h>
@@ -18,7 +18,7 @@ using namespace winrt;
 using namespace Windows::Foundation;
 using namespace Windows::Foundation::Collections;
 
-namespace winrt::NfqReplacementLib::implementation
+namespace winrt::WindowsSearch::implementation
 {
     __declspec(selectany) CLSID CLSID_CollatorDataSource = { 0x9E175B8B, 0xF52A, 0x11D8, 0xB9, 0xA5, 0x50, 0x50, 0x54, 0x50, 0x30, 0x30 };
 
@@ -30,7 +30,7 @@ namespace winrt::NfqReplacementLib::implementation
     constexpr DBORDINAL COL_DateModified = 5;
     constexpr DBORDINAL COL_DateCreated = 6;
 
-    WindowsSearchResult WindowsSearch::GetFiles(hstring const& folderPath)
+    WindowsSearchResult WindowsSearcher::GetFiles(hstring const& folderPath)
     {
         com_ptr<ISearchManager> searchManager;
         HRESULT hr = CoCreateInstance(CLSID_CSearchManager, nullptr, CLSCTX_ALL, IID_PPV_ARGS(searchManager.put()));

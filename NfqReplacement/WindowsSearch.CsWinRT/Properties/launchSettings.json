@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "NfqReplacementLibProjection": {
+    "WindowsSearch.CsWinRT": {
       "commandName": "Project",
       "nativeDebugging": true
     }

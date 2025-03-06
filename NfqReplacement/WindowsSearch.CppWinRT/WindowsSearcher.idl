@@ -1,10 +1,10 @@
 import "WindowsSearchResult.idl";
 
-namespace NfqReplacementLib
+namespace WindowsSearch
 {
     [bindable]
     [default_interface]
-    static runtimeclass WindowsSearch 
+    static runtimeclass WindowsSearcher 
     {
         static WindowsSearchResult GetFiles(String folderPath);
     }
