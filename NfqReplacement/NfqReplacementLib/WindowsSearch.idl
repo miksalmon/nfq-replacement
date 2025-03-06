@@ -1,4 +1,4 @@
-import "WindowsSearchResultItem.idl";
+import "WindowsSearchResult.idl";
 
 namespace NfqReplacementLib
 {
@@ -6,6 +6,6 @@ namespace NfqReplacementLib
     [default_interface]
     static runtimeclass WindowsSearch 
     {
-        static Windows.Foundation.Collections.IVector<WindowsSearchResultItem> GetFiles(String folderPath);
+        static WindowsSearchResult GetFiles(String folderPath);
     }
 }

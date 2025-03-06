@@ -6,7 +6,7 @@
 
 namespace winrt::NfqReplacementLib::implementation
 {
-	winrt::hstring WindowsSearchResultItem::Name()
+	winrt::hstring WindowsSearchResultItem::Name() const
 	{
 		return m_name;
 	}
@@ -16,7 +16,7 @@ namespace winrt::NfqReplacementLib::implementation
 		m_name = v;
 	}
 
-	winrt::hstring WindowsSearchResultItem::Type()
+	winrt::hstring WindowsSearchResultItem::Type() const
 	{
 		return m_type;
 	}
@@ -26,7 +26,7 @@ namespace winrt::NfqReplacementLib::implementation
 		m_type = v;
 	}
 
-	Windows::Foundation::DateTime WindowsSearchResultItem::ItemDate()
+	Windows::Foundation::DateTime WindowsSearchResultItem::ItemDate() const
 	{
 		return m_itemDate;
 	}
@@ -36,7 +36,7 @@ namespace winrt::NfqReplacementLib::implementation
 		m_itemDate = v;
 	}
 
-	Windows::Foundation::DateTime WindowsSearchResultItem::DateTaken()
+	Windows::Foundation::DateTime WindowsSearchResultItem::DateTaken() const
 	{
 		return m_dateTaken;
 	}
@@ -46,7 +46,7 @@ namespace winrt::NfqReplacementLib::implementation
 		m_dateTaken = v;
 	}
 
-	Windows::Foundation::DateTime WindowsSearchResultItem::DateModified()
+	Windows::Foundation::DateTime WindowsSearchResultItem::DateModified() const
 	{
 		return m_dateModified;
 	}
@@ -56,7 +56,7 @@ namespace winrt::NfqReplacementLib::implementation
 		m_dateModified = v;
 	}
 
-	Windows::Foundation::DateTime WindowsSearchResultItem::DateCreated()
+	Windows::Foundation::DateTime WindowsSearchResultItem::DateCreated() const
 	{
 		return m_dateCreated;
 	}
@@ -66,7 +66,7 @@ namespace winrt::NfqReplacementLib::implementation
 		m_dateCreated = v;
 	}
 
-	uint64_t WindowsSearchResultItem::Size()
+	uint64_t WindowsSearchResultItem::Size() const
 	{
 		return m_size;
 	}
@@ -76,7 +76,7 @@ namespace winrt::NfqReplacementLib::implementation
 		m_size = v;
 	}
 
-	winrt::hstring WindowsSearchResultItem::Dimensions()
+	winrt::hstring WindowsSearchResultItem::Dimensions() const
 	{
 		return m_dimensions;
 	}
@@ -86,7 +86,7 @@ namespace winrt::NfqReplacementLib::implementation
 		m_dimensions = v;
 	}
 
-	Windows::Foundation::Collections::IVector<winrt::hstring> WindowsSearchResultItem::Tags()
+	Windows::Foundation::Collections::IVector<winrt::hstring> WindowsSearchResultItem::Tags() const
 	{
 		return m_tags;
 	}
@@ -96,7 +96,7 @@ namespace winrt::NfqReplacementLib::implementation
 		m_tags = v;
 	}
 
-	uint32_t WindowsSearchResultItem::Rating()
+	uint32_t WindowsSearchResultItem::Rating() const
 	{
 		return m_rating;
 	}

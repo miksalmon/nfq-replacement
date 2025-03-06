@@ -1,10 +1,9 @@
-﻿using NfqReplacementLib;
+﻿using NfqReplacementApp.Extensions;
+using NfqReplacementLib;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using Windows.Storage;
-using Windows.Storage.Search;
 
 namespace NfqReplacementApp;
 
@@ -31,7 +30,17 @@ internal class Program
         stopWatch.Start();
         Console.WriteLine($"Using Windows Search Indexer.");
 
-        var files = WindowsSearch.GetFiles(folderPath);
+        WindowsSearchResult result = WindowsSearch.GetFiles(folderPath);
+        if (result.Status != WindowsSearchResultStatus.Success)
+        {
+            Console.WriteLine($"Error querying Windows Search Indexer.: {result.Status}.");
+            Console.WriteLine("Press any key to exit...");
+            Console.ReadLine();
+            return;
+        }
+
+        IList<WindowsSearchResultItem> files = result.Items;
+
         stopWatch.Stop();
         var queryTime = stopWatch.ElapsedMilliseconds;
         Console.WriteLine($"Found {files.Count} files.");
@@ -39,60 +48,26 @@ internal class Program
 
         stopWatch.Reset();
 
-        Console.WriteLine($"Sorting with LINQ.");
+        Console.WriteLine($"Filtering and Sorting with LINQ.");
         stopWatch.Start();
 
-        files = SortSearchResults(files, sort);
+        files = files.Where(f => f.IsSupportedFileType()).Sort(sort).ToList();
 
         stopWatch.Stop();
-        var sortTime = stopWatch.ElapsedMilliseconds;
-        Console.WriteLine($"Sort time: {sortTime}ms.\n");
+        var filterSortTime = stopWatch.ElapsedMilliseconds;
+        Console.WriteLine($"Filtering and Sorting time: {filterSortTime}ms.\n");
 
-        var totalTime = queryTime + sortTime;
+        var totalTime = queryTime + filterSortTime;
         Console.WriteLine($"Total time: {totalTime}ms\n");
 
         Console.WriteLine("Results:");
         PrintResults(files);
         Console.WriteLine();
 
+        Console.WriteLine($"Final item count: {files.Count} files.");
+
         Console.WriteLine("Press any key to exit...");
         Console.ReadLine();
-    }
-
-    private static IList<WindowsSearchResultItem> SortSearchResults(IList<WindowsSearchResultItem> results, FileExplorerSort sort)
-    {
-        IEnumerable<WindowsSearchResultItem> sortedFiles;
-        
-        switch(sort.PropertyKey)
-        {
-            case "System.ItemDate":
-                sortedFiles = sort.Ascending ? results.OrderBy(f => f.ItemDate) : results.OrderByDescending(f => f.ItemDate);
-                break;
-            case "System.Photo.DateTaken":
-                sortedFiles = sort.Ascending ? results.OrderBy(f => f.DateTaken) : results.OrderByDescending(f => f.DateTaken);
-                break;
-            case "System.DateModified":
-                sortedFiles = sort.Ascending ? results.OrderBy(f => f.DateModified) : results.OrderByDescending(f => f.DateModified);
-                break;
-            case "System.DateCreated":
-                sortedFiles = sort.Ascending ? results.OrderBy(f => f.DateCreated) : results.OrderByDescending(f => f.DateCreated);
-                break;
-            case "System.Size":
-                sortedFiles = sort.Ascending ? results.OrderBy(f => f.Size) : results.OrderByDescending(f => f.Size);
-                break;
-            case "System.Image.Dimensions":
-                sortedFiles = sort.Ascending ? results.OrderBy(f => f.Dimensions) : results.OrderByDescending(f => f.Dimensions);
-                break;
-            case "System.Rating":
-                sortedFiles = sort.Ascending ? results.OrderBy(f => f.Rating) : results.OrderByDescending(f => f.Rating);
-                break;
-            case "System.ItemNameDisplay":
-            default:
-                sortedFiles = sort.Ascending ? results.OrderBy(f => f.Name) : results.OrderByDescending(f => f.Name);
-                break;
-        }
-
-        return sortedFiles.ToList();
     }
 
     private static void PrintResults(IList<WindowsSearchResultItem> files)

@@ -8,6 +8,7 @@
   <ItemGroup>
     <ClCompile Include="pch.cpp">
     </ClCompile>
+    <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="NfqReplacementLib.rc">
@@ -24,5 +25,10 @@
   </ItemGroup>
   <ItemGroup>
     <Midl Include="WindowsSearch.idl" />
+    <Midl Include="FileExplorer.idl" />
+    <Midl Include="FileExplorerSort.idl" />
+    <Midl Include="WindowsSearchResultItem.idl" />
+    <Midl Include="WindowsSearchResult.idl" />
+    <Midl Include="WindowsSearchResultStatus.idl" />
   </ItemGroup>
 </Project>

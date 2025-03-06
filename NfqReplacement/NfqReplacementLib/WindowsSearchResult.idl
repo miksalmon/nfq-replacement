@@ -1,0 +1,16 @@
+import "WindowsSearchResultStatus.idl";
+import "WindowsSearchResultItem.idl";
+
+namespace NfqReplacementLib
+{
+    [bindable]
+    [default_interface]
+    runtimeclass WindowsSearchResult 
+    {
+        WindowsSearchResult(WindowsSearchResultStatus status);
+        WindowsSearchResult(WindowsSearchResultStatus status, Windows.Foundation.Collections.IVector<WindowsSearchResultItem> items);
+
+        WindowsSearchResultStatus Status{ get; };
+        Windows.Foundation.Collections.IVector<WindowsSearchResultItem> Items{ get; };
+    }
+}
