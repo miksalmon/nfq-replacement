@@ -48,15 +48,27 @@ namespace winrt::NfqReplacementLib::implementation
             return WindowsSearchResult(WindowsSearchResultStatus::UnknownError);
         }
 
-        // Check if the indexer is ready
-        CatalogStatus dwStatus;
-        CatalogPausedReason dwPausedReason;
-        hr = catalogManager->GetCatalogStatus(&dwStatus, &dwPausedReason);
-        if (FAILED(hr))
-        {
-            std::cerr << "Indexer is not ready. Status: " << dwStatus << ", Paused Reason: " << dwPausedReason << std::endl;
-            return WindowsSearchResult(WindowsSearchResultStatus::IndexerNotReady);
+        com_ptr<ISearchCrawlScopeManager> crawlScopeManager;
+        hr = catalogManager->GetCrawlScopeManager(crawlScopeManager.put());
+        if (FAILED(hr)) {
+            std::cerr << "Failed to get CrawlScopeManager. Error: " << hr << std::endl;
+            return WindowsSearchResult(WindowsSearchResultStatus::UnknownError);
         }
+
+        // Check if the folder is included in the index
+        BOOL isIncluded = FALSE;
+        hr = crawlScopeManager->IncludedInCrawlScope(folderPath.c_str(), &isIncluded);
+
+        if (FAILED(hr)) {
+            std::cerr << "Error checking crawl scope: " << hr << std::endl;
+            return WindowsSearchResult(WindowsSearchResultStatus::UnknownError);
+        }
+		// Check if the folder is being indexed
+		if (!isIncluded)
+		{
+			std::cerr << "Folder is not indexed." << std::endl;
+			return WindowsSearchResult(WindowsSearchResultStatus::FolderNotIndexed);
+		}
 
         com_ptr<ISearchQueryHelper> queryHelper;
         hr = catalogManager->GetQueryHelper(queryHelper.put());
@@ -233,6 +245,4 @@ namespace winrt::NfqReplacementLib::implementation
 
         return WindowsSearchResult(WindowsSearchResultStatus::Success, results);
     }
-
-
 }

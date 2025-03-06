@@ -4,7 +4,7 @@ namespace NfqReplacementLib
     {
         Success,
         Incomplete,
-        IndexerNotReady,
+        FolderNotIndexed,
         UnknownError
      };
 }
