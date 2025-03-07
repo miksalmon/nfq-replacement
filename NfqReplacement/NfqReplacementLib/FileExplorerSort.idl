@@ -1,4 +1,4 @@
-namespace WindowsSearch
+namespace NfqReplacementLib
 {
     [bindable]
     [default_interface]

@@ -1,4 +1,4 @@
-namespace WindowsSearch
+namespace NfqReplacementLib
 {
     enum WindowsSearchResultStatus
     {

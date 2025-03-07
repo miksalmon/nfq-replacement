@@ -11,11 +11,11 @@
     <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="WindowsSearch.CppWinRT.rc">
+    <ResourceCompile Include="NfqReplacementLib.rc">
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="WindowsSearch.CppWinRT.def">
+    <None Include="NfqReplacementLib.def">
     </None>
     <None Include="PropertySheet.props" />
     <None Include="packages.config" />

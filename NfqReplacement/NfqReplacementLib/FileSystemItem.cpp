@@ -4,7 +4,7 @@
 #include "FileSystemItem.g.cpp"
 #endif
 
-namespace winrt::WindowsSearch::implementation
+namespace winrt::NfqReplacementLib::implementation
 {
 	winrt::hstring FileSystemItem::Name() const
 	{

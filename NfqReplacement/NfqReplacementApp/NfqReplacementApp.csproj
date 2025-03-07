@@ -12,7 +12,7 @@
   </ImportGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\WindowsSearch.CsWinRT\WindowsSearch.CsWinRT.csproj" />
+    <ProjectReference Include="..\NfqReplacementLibProjection\NfqReplacementLibProjection.csproj" />
   </ItemGroup>
 
 </Project>

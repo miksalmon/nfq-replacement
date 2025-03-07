@@ -4,7 +4,7 @@
 #include "WindowsSearchResult.g.cpp"
 #endif
 
-namespace winrt::WindowsSearch::implementation
+namespace winrt::NfqReplacementLib::implementation
 {
     WindowsSearchResult::WindowsSearchResult(WindowsSearchResultStatus status)
     {

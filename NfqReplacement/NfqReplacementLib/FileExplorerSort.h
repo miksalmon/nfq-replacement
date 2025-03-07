@@ -2,7 +2,7 @@
 
 #include "FileExplorerSort.g.h"
 
-namespace winrt::WindowsSearch::implementation
+namespace winrt::NfqReplacementLib::implementation
 {
     struct FileExplorerSort : FileExplorerSortT<FileExplorerSort>
     {
@@ -20,7 +20,7 @@ namespace winrt::WindowsSearch::implementation
     };
 }
 
-namespace winrt::WindowsSearch::factory_implementation
+namespace winrt::NfqReplacementLib::factory_implementation
 {
     struct FileExplorerSort : FileExplorerSortT<FileExplorerSort, implementation::FileExplorerSort>
     {

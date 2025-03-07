@@ -2,7 +2,7 @@
 
 #include "FileSystemItem.g.h"
 
-namespace winrt::WindowsSearch::implementation
+namespace winrt::NfqReplacementLib::implementation
 {
     struct FileSystemItem : FileSystemItemT<FileSystemItem>
     {
@@ -56,7 +56,7 @@ namespace winrt::WindowsSearch::implementation
     };
 }
 
-namespace winrt::WindowsSearch::factory_implementation
+namespace winrt::NfqReplacementLib::factory_implementation
 {
     struct FileSystemItem : FileSystemItemT<FileSystemItem, implementation::FileSystemItem>
     {

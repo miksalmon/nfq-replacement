@@ -10,9 +10,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Directory.Build.props = Directory.Build.props
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WindowsSearch.CppWinRT", "WindowsSearch.CppWinRT\WindowsSearch.CppWinRT.vcxproj", "{B0BDD988-D8DD-4F64-851B-C08D0EC81905}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NfqReplacementLib", "NfqReplacementLib\NfqReplacementLib.vcxproj", "{B0BDD988-D8DD-4F64-851B-C08D0EC81905}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsSearch.CsWinRT", "WindowsSearch.CsWinRT\WindowsSearch.CsWinRT.csproj", "{94534C2B-6DF3-4F72-B02D-4BBD09751769}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NfqReplacementLibProjection", "NfqReplacementLibProjection\NfqReplacementLibProjection.csproj", "{94534C2B-6DF3-4F72-B02D-4BBD09751769}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileSystem", "FileSystem\FileSystem.csproj", "{72EB3A7D-26B0-429A-AE7E-74278E7AC9DE}"
 EndProject

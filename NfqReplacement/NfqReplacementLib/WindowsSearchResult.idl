@@ -1,7 +1,7 @@
 import "WindowsSearchResultStatus.idl";
 import "FileSystemItem.idl";
 
-namespace WindowsSearch
+namespace NfqReplacementLib
 {
     [bindable]
     [default_interface]

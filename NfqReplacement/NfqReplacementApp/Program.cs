@@ -1,5 +1,5 @@
 ﻿using NfqReplacementApp.Extensions;
-using WindowsSearch;
+using NfqReplacementLib;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -30,7 +30,7 @@ internal class Program
         stopWatch.Start();
         Console.WriteLine($"Using Windows Search Indexer.");
 
-        WindowsSearchResult result = WindowsSearcher.GetFiles(folderPath);
+        WindowsSearchResult result = WindowsSearch.GetFiles(folderPath);
         if (result.Status != WindowsSearchResultStatus.Success)
         {
             Console.WriteLine($"Error querying Windows Search Indexer.: {result.Status}.");
