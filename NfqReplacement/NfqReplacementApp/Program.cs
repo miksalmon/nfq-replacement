@@ -21,8 +21,9 @@ internal class Program
         IList<FileExplorerSort> sortColumns = sortColumns = FileExplorer.GetSortColumns(folderPath);
         stopWatch.Stop();
         FileExplorerSort sort = sortColumns.First();
+        var getExplorerSortTime = stopWatch.ElapsedMilliseconds;
         Console.WriteLine($"Sorting by {sort.PropertyKey} in {(sort.Ascending ? "Ascending" : "Descending")} order.");
-        Console.WriteLine($"Found sort order in: {stopWatch.ElapsedMilliseconds}ms.\n");
+        Console.WriteLine($"Found sort order in: {getExplorerSortTime}ms.\n");
 
         stopWatch.Reset();
 
@@ -32,24 +33,24 @@ internal class Program
         var projectionManager = new ProjectionManager();
         var sortOptions = sort.ToSortOptions();
         var projectionOptions = new ProjectionOptions() { Folder = folderPath, Sort = sortOptions };
-        var projection = projectionManager.CreateProjectionAsync(projectionOptions);
+        var projection = projectionManager.CreateProjection(projectionOptions);
         IList<FileSystemItem> files = projection.Items;
 
         stopWatch.Stop();
         var queryTime = stopWatch.ElapsedMilliseconds;
         Console.WriteLine($"Found {files.Count} files.");
-        Console.WriteLine($"Search time: {queryTime}ms.\n");
+        Console.WriteLine($"Query time: {queryTime}ms.\n");
 
         stopWatch.Reset();
 
-        Console.WriteLine("Results:");
-        PrintResults(files);
-        Console.WriteLine();
+        //Console.WriteLine("Results:");
+        //PrintResults(files);
+        //Console.WriteLine();
 
         Console.WriteLine($"Final item count: {files.Count} files.");
 
-        Console.WriteLine("Press any key to exit...");
-        Console.ReadLine();
+        var totalTime = getExplorerSortTime + queryTime;
+        Console.WriteLine($"Total time: {totalTime}ms.\n");
     }
 
     private static void PrintResults(IList<FileSystemItem> files)

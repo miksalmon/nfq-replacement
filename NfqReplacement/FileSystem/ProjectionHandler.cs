@@ -14,7 +14,7 @@ internal class ProjectionHandler : IDisposable
 
     private ProjectionOptions? Options { get; set; }
 
-    public Projection CreateProjectionAsync(ProjectionOptions options)
+    public Projection CreateProjection(ProjectionOptions options)
     {
         Options = options;
         FileSystemWatcher = CreateFileSystemWatcher(options.Folder);
