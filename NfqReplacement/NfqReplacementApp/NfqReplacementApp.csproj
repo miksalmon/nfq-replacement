@@ -12,6 +12,7 @@
   </ImportGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\FileSystem\FileSystem.csproj" />
     <ProjectReference Include="..\NfqReplacementLibProjection\NfqReplacementLibProjection.csproj" />
   </ItemGroup>
 

@@ -1,4 +1,4 @@
-﻿using NfqReplacementApp.Extensions;
+﻿using FileSystem;
 using NfqReplacementLib;
 using System;
 using System.Collections.Generic;
@@ -26,20 +26,14 @@ internal class Program
 
         stopWatch.Reset();
 
-        Console.WriteLine($"Querying Windows Search Indexer.");
+        Console.WriteLine($"Querying File System...");
         stopWatch.Start();
-        Console.WriteLine($"Using Windows Search Indexer.");
 
-        WindowsSearchResult result = WindowsSearch.GetFiles(folderPath);
-        if (result.Status != WindowsSearchResultStatus.Success)
-        {
-            Console.WriteLine($"Error querying Windows Search Indexer.: {result.Status}.");
-            Console.WriteLine("Press any key to exit...");
-            Console.ReadLine();
-            return;
-        }
-
-        IList<FileSystemItem> files = result.Items;
+        var projectionManager = new ProjectionManager();
+        var sortOptions = sort.ToSortOptions();
+        var projectionOptions = new ProjectionOptions() { Folder = folderPath, Sort = sortOptions };
+        var projection = projectionManager.CreateProjectionAsync(projectionOptions);
+        IList<FileSystemItem> files = projection.Items;
 
         stopWatch.Stop();
         var queryTime = stopWatch.ElapsedMilliseconds;
@@ -47,18 +41,6 @@ internal class Program
         Console.WriteLine($"Search time: {queryTime}ms.\n");
 
         stopWatch.Reset();
-
-        Console.WriteLine($"Filtering and Sorting with LINQ.");
-        stopWatch.Start();
-
-        files = files.Where(f => f.IsSupportedFileType()).Sort(sort).ToList();
-
-        stopWatch.Stop();
-        var filterSortTime = stopWatch.ElapsedMilliseconds;
-        Console.WriteLine($"Filtering and Sorting time: {filterSortTime}ms.\n");
-
-        var totalTime = queryTime + filterSortTime;
-        Console.WriteLine($"Total time: {totalTime}ms\n");
 
         Console.WriteLine("Results:");
         PrintResults(files);

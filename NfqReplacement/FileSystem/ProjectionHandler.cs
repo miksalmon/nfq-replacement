@@ -14,37 +14,16 @@ internal class ProjectionHandler : IDisposable
 
     private ProjectionOptions? Options { get; set; }
 
-    public async Task<Projection> CreateProjection(ProjectionOptions options)
+    public Projection CreateProjectionAsync(ProjectionOptions options)
     {
         Options = options;
         FileSystemWatcher = CreateFileSystemWatcher(options.Folder);
 
-        var loadExtraMetadata = options.Sort.Field == SortField.Date ||
-            options.Sort.Field == SortField.DateTaken ||
-            options.Sort.Field == SortField.Tags ||
-            options.Sort.Field == SortField.Dimensions ||
-            options.Sort.Field == SortField.Rating;
+        IEnumerable<FileSystemItem> items = FileSystemItemFetcher.FetchItems(options);
 
-        IList<FileSystemItem> items;
-        try
-        {
-            items = await FileSystemItemFetcher.FetchItemsAsync(options.Folder, loadExtraMetadata);
-        }
-        catch(Exception e)
-        {
-            Console.WriteLine(e.Message);
-            if (loadExtraMetadata)
-            {
-                Console.WriteLine("Falling back on Directory.EnumerateFiles");
-                items = await FileSystemItemFetcher.FetchItemsAsync(options.Folder, false);
-            }
-            else
-            {
-                throw;
-            }
-        }
+        // todo: figure out if we fell back to enumerate files to use options.FallbackSort
+        var comparer = FileSystemItemComparerDecider.GetComparer(options.Sort);
 
-        var comparer = FileSystemItemComparerDecider.GetComparer(options.Sort.Field);
         var fileSystemItems = new SortedObservableCollection<FileSystemItem>(comparer, items);
         Projection = new Projection { Items = fileSystemItems };
         return Projection;
@@ -82,15 +61,16 @@ internal class ProjectionHandler : IDisposable
         return fileSystemWatcher;
     }
 
-    private async void FileSystemWatcher_Changed(object sender, FileSystemEventArgs e)
+    private /*async*/ void FileSystemWatcher_Changed(object sender, FileSystemEventArgs e)
     {
-        var newFileSystemItem = await FileSystemItemFetcher.FetchItemAsync(e.FullPath, loadExtraMetadata: true);
+        //var newFileSystemItem = await FileSystemItemFetcher.FetchItemAsyn(e.FullPath, loadExtraMetadata: true);
+        var newFileSystemItem = new FileSystemItem();
         for (int i = 0; i < Projection?.Items.Count; i++)
         {
             var item = Projection.Items[i];
             if (item.Path == e.FullPath)
             {
-                var comparer = FileSystemItemComparerDecider.GetComparer(Options?.Sort.Field ?? SortField.Name);
+                var comparer = FileSystemItemComparerDecider.GetComparer(Options?.Sort ?? new SortOptions() { Field = SortField.Name, Order = SortOrder.Ascending });
                 if (comparer.Compare(item, newFileSystemItem) == 0)
                 {
                     Projection.Items.RemoveAt(i);
@@ -106,9 +86,10 @@ internal class ProjectionHandler : IDisposable
         }
     }
 
-    private async void FileSystemWatcher_Created(object sender, FileSystemEventArgs e)
+    private /*async*/ void FileSystemWatcher_Created(object sender, FileSystemEventArgs e)
     {
-        var newFileSystemItem = await FileSystemItemFetcher.FetchItemAsync(e.FullPath, loadExtraMetadata: true);
+        // var newFileSystemItem = await FileSystemItemFetcher.FetchItemAsync(e.FullPath, loadExtraMetadata: true);
+        var newFileSystemItem = new FileSystemItem();
         Projection?.Items.AddSorted(newFileSystemItem);
     }
 

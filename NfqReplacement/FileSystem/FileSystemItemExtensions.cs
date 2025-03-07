@@ -1,16 +1,13 @@
 ﻿using NfqReplacementLib;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace NfqReplacementApp.Extensions
+namespace FileSystem
 {
     public static class FileSystemItemExtensions
     {
-        public static readonly HashSet<string> SupportedFileTypes = new HashSet<string>
-        {
+        public static readonly HashSet<string> SupportedFileTypes =
+        [
             // Regular image formats
             ".jpg", ".jpeg", ".thumb", ".png", ".tif", ".tiff", ".dng", ".bmp", ".dib", ".gif", ".jfif",
             ".jpe", ".jxr", ".wdp", ".ico", ".heic", ".heif", ".hif", ".avif", ".webp", ".jxl",
@@ -21,7 +18,7 @@ namespace NfqReplacementApp.Extensions
 
             // Video formats
             ".3g2", ".3gp", ".3gp2", ".3gpp", ".asf", ".avi", ".m2t", ".m2ts", ".m4v", ".mkv", ".mov", ".mp4", ".mp4v", ".mts", ".wm", ".wmv"
-        };
+        ];
 
         public static bool IsSupportedFileType(this FileSystemItem item)
         {

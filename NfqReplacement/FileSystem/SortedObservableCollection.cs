@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace FileSystem;
 
 public class SortedObservableCollection<T> : ObservableCollection<T>
 {
     public SortedObservableCollection(IComparer<T> comparer, IEnumerable<T> items)
-        :base(items)
+        : base(items.OrderBy(item => item, comparer))
     {
         Comparer = comparer;
     }

@@ -6,31 +6,29 @@ namespace FileSystem
 {
     public static class FileSystemItemComparerDecider
     {
-        public static Comparer<FileSystemItem> GetComparer(SortField sortField)
+        public static Comparer<FileSystemItem> GetComparer(SortOptions sortOptions)
         {
-            switch (sortField)
+            Comparer<FileSystemItem> comparer = sortOptions.Field switch
             {
-                case SortField.Name:
-                    return new NameComparer();
-                case SortField.Size:
-                    return new SizeComparer();
-                case SortField.Tags:
-                    return new TagsComparer();
-                case SortField.Rating:
-                    return new RatingComparer();
-                case SortField.Dimensions:
-                    return new DimensionsComparer();
-                case SortField.Date:
-                    return new DateComparer();
-                case SortField.DateCreated:
-                    return new DateCreatedComparer();
-                case SortField.DateModified:
-                    return new DateModifiedComparer();
-                case SortField.DateTaken:
-                    return new DateTakenComparer();
-                default:
-                    throw new ArgumentException("Invalid sort field", nameof(sortField));
-            }
+                SortField.Name => new NameComparer(),
+                SortField.Size => new SizeComparer(),
+                SortField.Tags => new TagsComparer(),
+                SortField.Rating => new RatingComparer(),
+                SortField.Dimensions => new DimensionsComparer(),
+                SortField.Date => new DateComparer(),
+                SortField.DateCreated => new DateCreatedComparer(),
+                SortField.DateModified => new DateModifiedComparer(),
+                SortField.DateTaken => new DateTakenComparer(),
+                _ => throw new ArgumentException("Invalid sort field", nameof(sortOptions.Field))
+            };
+
+            return sortOptions.Order == SortOrder.Ascending ? comparer : comparer.Inverse();
+        }
+
+        private static Comparer<FileSystemItem> Inverse(this Comparer<FileSystemItem> comparer)
+        {
+            var inverseComparer = Comparer<FileSystemItem>.Create((x, y) => comparer.Compare(y, x));
+            return inverseComparer;
         }
     }
 
