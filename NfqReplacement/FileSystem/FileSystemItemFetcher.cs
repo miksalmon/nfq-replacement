@@ -4,6 +4,8 @@ using System.IO;
 using System.Threading.Tasks;
 using Windows.Storage;
 using NfqReplacementLib;
+using Microsoft.UI.Xaml.Shapes;
+using System.Linq;
 
 
 namespace FileSystem;
@@ -39,9 +41,9 @@ static class FileSystemItemFetcher
             var properties = await storageFile.Properties.GetImagePropertiesAsync();
             if (properties != null)
             {
+                dimensions = $"{properties.Width}x{properties.Height}";
                 rating = properties.Rating;
                 dateTaken = properties.DateTaken;
-                dimensions = $"{properties.Width}x{properties.Height}";
                 tags = properties.Keywords;
             }
         }
@@ -60,14 +62,33 @@ static class FileSystemItemFetcher
         };
     }
 
-    public static IList<FileSystemItem> FetchItems(string folderPath)
+    public static async Task<IList<FileSystemItem>> FetchItemsAsync(string folderPath, bool loadExtraMetadata = false)
     {
-        WindowsSearchResult result = WindowsSearch.GetFiles(folderPath);
-        if (result.Status != WindowsSearchResultStatus.Success)
+        IList<FileSystemItem> items;
+        if (loadExtraMetadata)
         {
-            throw new InvalidOperationException($"Error querying Windows Search Indexer: {result.Status}.");
+            var result = WindowsSearch.GetFiles(folderPath);
+            if (result.Status != WindowsSearchResultStatus.Success)
+            {
+                throw new InvalidOperationException($"Error querying Windows Search Indexer: {result.Status}.");
+            }
+
+            items = result.Items;
+        }
+        else
+        {
+            // filter?
+            // SearchOption.AllDirectories?
+            var files = Directory.EnumerateFiles(folderPath, "*.*", SearchOption.TopDirectoryOnly);
+            items = new List<FileSystemItem>();
+            foreach (var file in files)
+            {
+                var item = await FetchItemAsync(file, loadExtraMetadata);
+                items.Add(item);
+            }
         }
 
-        return result.Items;
+
+        return items;
     }
 }

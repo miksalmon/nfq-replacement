@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using NfqReplacementLib;
+using System.Threading.Tasks;
 
 namespace FileSystem;
 
@@ -13,12 +14,36 @@ internal class ProjectionHandler : IDisposable
 
     private ProjectionOptions? Options { get; set; }
 
-    public Projection CreateProjection(ProjectionOptions options)
+    public async Task<Projection> CreateProjection(ProjectionOptions options)
     {
         Options = options;
         FileSystemWatcher = CreateFileSystemWatcher(options.Folder);
 
-        var items = FileSystemItemFetcher.FetchItems(options.Folder);
+        var loadExtraMetadata = options.Sort.Field == SortField.Date ||
+            options.Sort.Field == SortField.DateTaken ||
+            options.Sort.Field == SortField.Tags ||
+            options.Sort.Field == SortField.Dimensions ||
+            options.Sort.Field == SortField.Rating;
+
+        IList<FileSystemItem> items;
+        try
+        {
+            items = await FileSystemItemFetcher.FetchItemsAsync(options.Folder, loadExtraMetadata);
+        }
+        catch(Exception e)
+        {
+            Console.WriteLine(e.Message);
+            if (loadExtraMetadata)
+            {
+                Console.WriteLine("Falling back on Directory.EnumerateFiles");
+                items = await FileSystemItemFetcher.FetchItemsAsync(options.Folder, false);
+            }
+            else
+            {
+                throw;
+            }
+        }
+
         var comparer = FileSystemItemComparerDecider.GetComparer(options.Sort.Field);
         var fileSystemItems = new SortedObservableCollection<FileSystemItem>(comparer, items);
         Projection = new Projection { Items = fileSystemItems };

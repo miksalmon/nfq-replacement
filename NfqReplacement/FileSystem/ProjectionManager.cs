@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace FileSystem;
 
@@ -8,10 +9,10 @@ public class ProjectionManager
 {
     private Dictionary<Guid, ProjectionHandler> ProjectionHandlers { get; } = new();
 
-    public Projection CreateProjection(ProjectionOptions options)
+    public async Task<Projection> CreateProjection(ProjectionOptions options)
     {
         var projectionHandler = new ProjectionHandler();
-        var projection = projectionHandler.CreateProjection(options);
+        var projection = await projectionHandler.CreateProjection(options);
         ProjectionHandlers.Add(projection.Id, projectionHandler);
         return projection;
     }
