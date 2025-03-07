@@ -97,23 +97,27 @@ static class FileSystemItemFetcher
         };
     }
 
-    public static IEnumerable<FileSystemItem> FetchItems(ProjectionOptions options)
+    public static (IEnumerable<FileSystemItem> Items, bool UseFallback) FetchItems(ProjectionOptions options)
     {
-        var loadExtraMetadata = options.Sort.Field == SortField.Date ||
+        var loadExtraMetadata = 
+            options.Sort.Field == SortField.Date ||
             options.Sort.Field == SortField.DateTaken ||
             options.Sort.Field == SortField.Tags ||
             options.Sort.Field == SortField.Dimensions ||
             options.Sort.Field == SortField.Rating;
 
         IEnumerable<FileSystemItem> items;
+        var useFallback = false;
         if (loadExtraMetadata)
         {
             Console.WriteLine($"Using Windows Search Indexer...");
             var result = WindowsSearch.GetFiles(options.Folder);
             if (result.Status != WindowsSearchResultStatus.Success)
             {
+                // TODO: return error instead
                 Console.WriteLine($"Error querying Windows Search Indexer: {result.Status}.");
                 items = DotNetEnumerateFiles(options);
+                useFallback = true;
             }
 
             items = result.Items;
@@ -125,7 +129,7 @@ static class FileSystemItemFetcher
 
         items = items.Where(item => item.IsSupportedFileType());
 
-        return items;
+        return (items, useFallback);
     }
 
     private static IList<FileSystemItem> DotNetEnumerateFiles(ProjectionOptions options)

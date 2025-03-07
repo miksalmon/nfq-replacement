@@ -43,9 +43,9 @@ internal class Program
 
         stopWatch.Reset();
 
-        Console.WriteLine("Results:");
-        PrintResults(files);
-        Console.WriteLine();
+        //Console.WriteLine("Results:");
+        //PrintResults(files);
+        //Console.WriteLine();
 
         Console.WriteLine($"Final item count: {files.Count} files.");
 
@@ -53,7 +53,6 @@ internal class Program
         Console.WriteLine($"Total time: {totalTime}ms.\n");
 
         Console.WriteLine("Press 'q' to quit.");
-
         while (true)
         {
             if (Console.ReadKey().KeyChar == 'q')
