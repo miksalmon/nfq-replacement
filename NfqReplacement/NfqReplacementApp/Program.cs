@@ -33,7 +33,7 @@ internal class Program
         var projectionManager = new ProjectionManager();
         var sortOptions = sort.ToSortOptions();
         var projectionOptions = new ProjectionOptions() { Folder = folderPath, Sort = sortOptions };
-        var projection = projectionManager.CreateProjection(projectionOptions);
+        var projection = projectionManager.CreateProjection(projectionOptions, handleFileSystemChanges: false);
         IList<FileSystemItem> files = projection.Items;
 
         stopWatch.Stop();

@@ -9,10 +9,10 @@ public class ProjectionManager
 {
     private Dictionary<Guid, ProjectionHandler> ProjectionHandlers { get; } = new();
 
-    public Projection CreateProjection(ProjectionOptions options)
+    public Projection CreateProjection(ProjectionOptions options, bool handleFileSystemChanges)
     {
         var projectionHandler = new ProjectionHandler();
-        var projection = projectionHandler.CreateProjection(options);
+        var projection = projectionHandler.CreateProjection(options, handleFileSystemChanges);
         ProjectionHandlers.Add(projection.Id, projectionHandler);
         return projection;
     }

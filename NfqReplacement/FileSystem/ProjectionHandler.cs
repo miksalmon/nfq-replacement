@@ -14,10 +14,13 @@ internal class ProjectionHandler : IDisposable
 
     private ProjectionOptions? Options { get; set; }
 
-    public Projection CreateProjection(ProjectionOptions options)
+    public Projection CreateProjection(ProjectionOptions options, bool handleFileSystemChanges)
     {
         Options = options;
-        // FileSystemWatcher = CreateFileSystemWatcher(options.Folder);
+        if (handleFileSystemChanges)
+        {
+            FileSystemWatcher = CreateFileSystemWatcher(options.Folder);
+        }
 
         (IEnumerable<FileSystemItem> items, bool useFallback) = FileSystemItemFetcher.FetchItems(options);
 
