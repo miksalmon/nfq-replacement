@@ -62,11 +62,12 @@ static class FileSystemItemFetcher
         };
     }
 
-    public static FileSystemItem CreateFileSystemItem(string filePath, bool loadExtraMetadata = false)
+    public static FileSystemItem CreateFileSystemItem(string filePath)
     {
         var fileInfo = new FileInfo(filePath);
 
         var name = fileInfo.Name;
+        var path = fileInfo.FullName;
         var type = fileInfo.Extension;
         var size = fileInfo.Length;
         var dateCreated = fileInfo.CreationTime;
@@ -81,6 +82,7 @@ static class FileSystemItemFetcher
         return new FileSystemItem
         {
             Name = name,
+            Path = path,
             Type = type,
             Size = (ulong)size,
             DateCreated = dateCreated,

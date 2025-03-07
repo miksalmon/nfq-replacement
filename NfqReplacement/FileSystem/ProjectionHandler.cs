@@ -63,8 +63,7 @@ internal class ProjectionHandler : IDisposable
 
     private /*async*/ void FileSystemWatcher_Changed(object sender, FileSystemEventArgs e)
     {
-        //var newFileSystemItem = await FileSystemItemFetcher.FetchItemAsyn(e.FullPath, loadExtraMetadata: true);
-        var newFileSystemItem = new FileSystemItem();
+        var newFileSystemItem = FileSystemItemFetcher.CreateFileSystemItem(e.FullPath);
         for (int i = 0; i < Projection?.Items.Count; i++)
         {
             var item = Projection.Items[i];
@@ -75,10 +74,14 @@ internal class ProjectionHandler : IDisposable
                 {
                     Projection.Items.RemoveAt(i);
                     Projection.Items.AddSorted(newFileSystemItem);
+                    Console.WriteLine($"Sort property changed: {newFileSystemItem.Path}");
+                    PrintResults(Projection.Items);
                 }
                 else
                 {
-                    Projection?.Items.UpdateAt(i, newFileSystemItem);
+                    Projection.Items.UpdateAt(i, newFileSystemItem);
+                    Console.WriteLine($"Property changed: {newFileSystemItem.Path}");
+                    PrintResults(Projection.Items);
                 }
 
                 break;
@@ -86,11 +89,13 @@ internal class ProjectionHandler : IDisposable
         }
     }
 
-    private /*async*/ void FileSystemWatcher_Created(object sender, FileSystemEventArgs e)
+    private void FileSystemWatcher_Created(object sender, FileSystemEventArgs e)
     {
-        // var newFileSystemItem = await FileSystemItemFetcher.FetchItemAsync(e.FullPath, loadExtraMetadata: true);
-        var newFileSystemItem = new FileSystemItem();
+        var newFileSystemItem = FileSystemItemFetcher.CreateFileSystemItem(e.FullPath);
+
         Projection?.Items.AddSorted(newFileSystemItem);
+        Console.WriteLine($"Added: {e.FullPath}");
+        PrintResults(Projection!.Items);
     }
 
     private void FileSystemWatcher_Deleted(object sender, FileSystemEventArgs e)
@@ -101,6 +106,8 @@ internal class ProjectionHandler : IDisposable
             if (item.Path == e.FullPath)
             {
                 Projection.Items.RemoveAt(i);
+                Console.WriteLine($"Removed: {item.Path}");
+                PrintResults(Projection.Items);
                 break;
             }
         }
@@ -115,8 +122,35 @@ internal class ProjectionHandler : IDisposable
             {
                 item.Path = e.FullPath;
                 Projection.Items.UpdateSorted(item);
+                Console.WriteLine($"Renamed: {e.OldFullPath} -> {item.Path}");
+                PrintResults(Projection.Items);
                 break;
             }
         }
+    }
+
+    private static void PrintResults(IList<FileSystemItem> files)
+    {
+        foreach (var file in files)
+        {
+            PrintFileProperties(file);
+
+            Console.WriteLine();
+        }
+    }
+
+    private static void PrintFileProperties(FileSystemItem file)
+    {
+        Console.WriteLine($"Name: {file.Name}");
+        Console.WriteLine($"Path: {file.Path}");
+        Console.WriteLine($"Type: {file.Type}");
+        Console.WriteLine($"ItemDate: {file.ItemDate}");
+        Console.WriteLine($"DateTaken: {file.DateTaken}");
+        Console.WriteLine($"DateModified: {file.DateModified}");
+        Console.WriteLine($"DateCreated: {file.DateCreated}");
+        Console.WriteLine($"Size: {file.Size}");
+        Console.WriteLine($"Dimensions: {file.Dimensions}");
+        Console.WriteLine($"Tags: {string.Join("; ", file.Tags)}");
+        Console.WriteLine($"Rating: {file.Rating}");
     }
 }
