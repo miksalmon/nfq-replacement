@@ -1,5 +1,5 @@
 ﻿using System;
-using WindowsSearch;
+using NfqReplacementLib;
 
 namespace FileSystem;
 

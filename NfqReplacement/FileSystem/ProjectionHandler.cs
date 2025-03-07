@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System;
 using System.Collections.Generic;
-using WindowsSearch;
+using NfqReplacementLib;
 
 namespace FileSystem;
 

@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using Windows.Storage;
-using WindowsSearch;
+using NfqReplacementLib;
+
 
 namespace FileSystem;
 
@@ -61,7 +62,7 @@ static class FileSystemItemFetcher
 
     public static IList<FileSystemItem> FetchItems(string folderPath)
     {
-        WindowsSearchResult result = WindowsSearcher.GetFiles(folderPath);
+        WindowsSearchResult result = WindowsSearch.GetFiles(folderPath);
         if (result.Status != WindowsSearchResultStatus.Success)
         {
             throw new InvalidOperationException($"Error querying Windows Search Indexer: {result.Status}.");
