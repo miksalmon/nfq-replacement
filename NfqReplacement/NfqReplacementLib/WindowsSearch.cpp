@@ -111,7 +111,7 @@ namespace winrt::NfqReplacementLib::implementation
         std::wstring where = std::format(L"WHERE(DIRECTORY = 'file:{}') ", folderPath);
 
         auto query = select + from + where;
-        std::wcout << L"Query: " << query << std::endl;
+        // std::wcout << L"Query: " << query << std::endl;
 
         com_ptr<ICommandText> commandText = unknownCommandText.as<ICommandText>();
         hr = commandText->SetCommandText(DBGUID_DEFAULT, query.c_str());
