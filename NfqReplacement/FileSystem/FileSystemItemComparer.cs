@@ -36,7 +36,7 @@ namespace FileSystem
     {
         public override int Compare(FileSystemItem? x, FileSystemItem? y)
         {
-            return string.Compare(x?.Name, y?.Name, StringComparison.Ordinal);
+            return string.Compare(x?.Name, y?.Name, StringComparison.OrdinalIgnoreCase);
         }
     }
 

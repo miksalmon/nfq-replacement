@@ -22,7 +22,7 @@ namespace FileSystem
 
         public static bool IsSupportedFileType(this FileSystemItem item)
         {
-            return SupportedFileTypes.Contains(item.Type);
+            return SupportedFileTypes.Contains(item.Type.ToLower());
         }
 
         public static IEnumerable<FileSystemItem> Sort(this IEnumerable<FileSystemItem> results, FileExplorerSort sort)
