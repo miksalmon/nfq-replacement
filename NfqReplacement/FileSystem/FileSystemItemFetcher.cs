@@ -112,15 +112,18 @@ static class FileSystemItemFetcher
         {
             Console.WriteLine($"Using Windows Search Indexer...");
             var result = WindowsSearch.GetFiles(options.Folder);
-            if (result.Status != WindowsSearchResultStatus.Success)
+
+            if (result.Status == WindowsSearchResultStatus.Success)
+            {
+                items = result.Items;
+            }
+            else 
             {
                 // TODO: return error instead
                 Console.WriteLine($"Error querying Windows Search Indexer: {result.Status}.");
                 items = DotNetEnumerateFiles(options);
                 useFallback = true;
             }
-
-            items = result.Items;
         }
         else
         {
