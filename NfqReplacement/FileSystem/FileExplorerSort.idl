@@ -1,4 +1,4 @@
-namespace NfqReplacementLib
+namespace FileSystem
 {
     [bindable]
     [default_interface]

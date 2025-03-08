@@ -1,6 +1,6 @@
 import "FileExplorerSort.idl";
 
-namespace NfqReplacementLib
+namespace FileSystem
 {
     [bindable]
     [default_interface]

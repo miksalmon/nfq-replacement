@@ -1,6 +1,6 @@
 import "WindowsSearchResult.idl";
 
-namespace NfqReplacementLib
+namespace FileSystem
 {
     [bindable]
     [default_interface]

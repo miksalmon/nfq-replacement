@@ -1,6 +1,4 @@
-﻿using NfqReplacementLib;
-
-namespace FileSystem
+﻿namespace FileSystem
 {
     public static class FileSystemSortExtensions
     {

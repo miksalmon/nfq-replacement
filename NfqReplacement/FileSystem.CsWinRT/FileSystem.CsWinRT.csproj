@@ -3,7 +3,11 @@
   <Import Project="..\Props\CSharp.WASDK.props" />
 
   <ItemGroup>
-    <ProjectReference Include="..\NfqReplacementLib\NfqReplacementLib.vcxproj" />
+    <ProjectReference Include="..\FileSystem\FileSystem.vcxproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\" />
   </ItemGroup>
 
   <ImportGroup Label="PropertySheets">
@@ -13,7 +17,7 @@
   <!--CsWinRT properties-->
   <PropertyGroup>
     <!--Specify namespaces to create a C# projection for-->
-    <CsWinRTIncludes>NfqReplacementLib;</CsWinRTIncludes>
+    <CsWinRTIncludes>FileSystem;</CsWinRTIncludes>
     <!--Set output path for generated source files/projection dll to OutDir (defined in Directory.Build.props)-->
     <CsWinRTGeneratedFilesDir>$(OutDir)</CsWinRTGeneratedFilesDir>
   </PropertyGroup>

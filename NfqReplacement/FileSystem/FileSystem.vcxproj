@@ -10,7 +10,8 @@
     <CppWinRTGenerateWindowsMetadata>true</CppWinRTGenerateWindowsMetadata>
     <MinimalCoreWin>true</MinimalCoreWin>
     <ProjectGuid>{b0bdd988-d8dd-4f64-851b-c08d0ec81905}</ProjectGuid>
-    <RootNamespace>NfqReplacementLib</RootNamespace>
+    <ProjectName>FileSystem</ProjectName>
+    <RootNamespace>FileSystem</RootNamespace>
     <DefaultLanguage>en-US</DefaultLanguage>
     <ApplicationType>Windows Store</ApplicationType>
     <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
@@ -63,7 +64,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateWindowsMetadata>false</GenerateWindowsMetadata>
-      <ModuleDefinitionFile>NfqReplacementLib.def</ModuleDefinitionFile>
+      <ModuleDefinitionFile>FileSystem.def</ModuleDefinitionFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)'=='Debug'">
@@ -138,7 +139,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="NfqReplacementLib.def" />
+    <None Include="FileSystem.def" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -148,7 +149,7 @@
     <Version Condition="'$(Version)' == ''">0.0.0.0</Version>
   </PropertyGroup>
   <ItemGroup>
-    <ResourceCompile Include="NfqReplacementLib.rc" PreprocessorDefinitions="%(PreprocessorDefinitions);APP_VERSION_MAJOR=$(Version.Split(`.`)[0]);APP_VERSION_MINOR=$(Version.Split(`.`)[1]);APP_VERSION_BUILD=$(Version.Split(`.`)[2]);APP_VERSION_REVISION=$(Version.Split(`.`)[3])" />
+    <ResourceCompile Include="FileSystem.rc" PreprocessorDefinitions="%(PreprocessorDefinitions);APP_VERSION_MAJOR=$(Version.Split(`.`)[0]);APP_VERSION_MINOR=$(Version.Split(`.`)[1]);APP_VERSION_BUILD=$(Version.Split(`.`)[2]);APP_VERSION_REVISION=$(Version.Split(`.`)[3])" />
   </ItemGroup>
   <ItemGroup>
     <Midl Include="FileExplorer.idl">

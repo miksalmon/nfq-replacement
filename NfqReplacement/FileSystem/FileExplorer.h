@@ -4,7 +4,7 @@
 
 #include <shlobj.h>
 
-namespace winrt::NfqReplacementLib::implementation
+namespace winrt::FileSystem::implementation
 {
     struct FileExplorer : FileExplorerT<FileExplorer>
     {
@@ -22,7 +22,7 @@ namespace winrt::NfqReplacementLib::implementation
     };
 }
 
-namespace winrt::NfqReplacementLib::factory_implementation
+namespace winrt::FileSystem::factory_implementation
 {
     struct FileExplorer : FileExplorerT<FileExplorer, implementation::FileExplorer>
     {

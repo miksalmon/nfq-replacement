@@ -4,7 +4,7 @@
 #include "FileExplorerSort.g.cpp"
 #endif
 
-namespace winrt::NfqReplacementLib::implementation
+namespace winrt::FileSystem::implementation
 {
     FileExplorerSort::FileExplorerSort(const winrt::hstring& propertyKey, bool ascending) :
         m_propertyKey(propertyKey), m_ascending(ascending)
