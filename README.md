@@ -1,8 +1,10 @@
 # NFQ Replacement
  
-This project is an experimental library designed to replace the Neighboring Files Query (NFQ) on Windows. It is built using Native AOT, C#/WinRT, and C++/WinRT. The primary goal is to match the features of the existing NFQ while significantly improving performance and reliability. T
+This project is an experimental library designed to replace the Neighboring Files Query (NFQ) on Windows. It is built using Native AOT, C#/WinRT, and C++/WinRT. 
 
-This project was quickly hacked together to explore a feasible path for future development.
+The primary goal is to match the features of the existing NFQ while significantly improving performance and reliability.
+
+This implementation was quickly hacked together to explore a feasible path for future development. The gist of this implementation is to query all supported files in a folder following File Explorer sorting and ordering.
  
 ## Features
  
