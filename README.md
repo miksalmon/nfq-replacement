@@ -19,6 +19,7 @@ This implementation was quickly hacked together to explore a feasible path for f
   - Leverages the Windows Search Indexer for querying folders sorted with extra metadata.
     - Used when sorting by `Date`, `Date Taken`, `Tags`, `Dimensions`, `Rating`.
   - Implements `System.IO.FileSystemWatcher` to easily watch file system changes.
+  - Extracts the File Explorer sort order with the Windows Shell API.
 - **High Productivity and Easy Maintenance**:
   - Leverages C# for rapid development and utilization of simple APIs.
   - Uses C++/WinRT sparingly to minimize P/Invoke and COM interop overhead.
