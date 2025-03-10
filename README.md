@@ -54,7 +54,7 @@ This implementation was quickly hacked together to explore a feasible path for f
 | Date (Descending)          | 19.33                      | 5696.33         | 5715.67         |
 | Dimensions (Ascending)     | 19.67                      | 5197.67         | 5217.33         |
  
-## Future considerations
+## Future Considerations
 - **Extended Feature Set**:
   - 1:1 File Explorer sorting order: This would require understanding all the ordering heuristics used by File Explorer.
   - Use better fallbacks if the Windows Search Indexer is not ready.
