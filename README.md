@@ -54,6 +54,7 @@ This implementation was quickly hacked together to explore a feasible path for f
 | Date (Descending)          | 19.33                      | 5696.33         | 5715.67         |
 | Dimensions (Ascending)     | 19.67                      | 5197.67         | 5217.33         |
  
+## Future considerations
 - **Extended Feature Set**:
   - 1:1 File Explorer sorting order: This would require understanding all the ordering heuristics used by File Explorer.
   - Use better fallbacks if the Windows Search Indexer is not ready.
@@ -62,3 +63,7 @@ This implementation was quickly hacked together to explore a feasible path for f
   - Handle efficiently all cases of file system changes.
 - **Performance Optimization**:
   - Improve sort and filtering, potentially using either C# `Span` or move sorting and filtering to C++ using `std::vector` and `std::sort`.
+
+ ## References
+ - https://github.com/estebanm123/nfq-alt-test
+ - https://github.com/SamChaps/FileEnumerationPerf
